@@ -1,8 +1,7 @@
 <h1>Register Book</h1>
-<p>Find me in app/views/register_book/new.html.erb</p>
+<p>Find me in app/views/books/new.html.erb</p>
 
-<%= form_for(@register_book) do |f| %>
-
+<%= form_for(@book) do |f| %>
   <%= f.label :title %>
   <%= f.text_field :title %>
 
@@ -16,5 +15,4 @@
   <%= f.text_field :quantity %>
 
   <%= f.submit "Register book" %>
-
 <% end %>
