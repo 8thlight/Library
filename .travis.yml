@@ -3,9 +3,13 @@ rvm:
   - 1.9.3
   - 1.9.2
 
-script: bundle exec rspec spec
-#before_script:
-#  - psql -c 'create database myapp_test;' -U postgres
-#
+env:
+  - DB=sqlite
+
+script:
+  - RAILS_ENV=test bundle exec rake --trace db:migrate test
+
+
+
 
 

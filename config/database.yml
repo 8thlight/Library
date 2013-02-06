@@ -26,3 +26,7 @@ production:
 
 cucumber:
   <<: *test
+
+sqlite: &sqlite
+  adapter: sqlite3
+  database: db/<%= Rails.env %>.sqlite3
