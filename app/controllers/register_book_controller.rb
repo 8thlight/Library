@@ -1,6 +1,6 @@
 class RegisterBookController < ApplicationController
   def new
-    @book = Book.new
+    @register_book = Book.new
   end
 
   def _form
