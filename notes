@@ -7,4 +7,36 @@ flash messages
 index page with a list of books alphabetical
 
 
+<%= form_for(@book) do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+
+  <%= f.label :author %>
+  <%= f.text_field :author %>
+
+  <%= f.label :isbn %>
+  <%= f.text_field :isbn %>
+
+  <%= f.label :quantity %>
+  <%= f.text_field :quantity %>
+
+  <%= f.submit "Register book" %>
+<% end %>
+
+
+  form.should have_selector("input",
+                                :type => "text",
+                                :name => "book[author]",
+                                :value => "Michael Hartl"
+                               )
+      form.should have_selector("input",
+                                :type => "text",
+                                :name => "book[isbn]",
+                                :value => "1234567890"
+                               )
+      form.should have_selector("input",
+                                :type => "text",
+                                :name => "book[quantity]",
+                                :value => 4
+                               )
 
