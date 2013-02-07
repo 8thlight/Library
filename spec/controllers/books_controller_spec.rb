@@ -59,31 +59,4 @@ describe BooksController do
       end
     end
   end
-
-
-
-
-
-
-#  describe "POST 'create'" do
-#    context "with correct attributes" do
-#      before do
-#        @attrs = {:title => "Moby Dick", :isbn => "1234567891", :author => "Hemmingway", :quantity => 10}
-#      end
-#
-#      it "creates a book" do
-#        post :create, {:book => @attrs}
-#        Book.count.should_not == 0
-#      end
-#    end
-#  end
-
- # context "when the book registration fails to save" do
- #   let(:book) {mock_model(Book).as_null_object}
- #   it "assigns @book" do
- #     book.stub(:save).and_return(false)
- #     post :create
- #     assigns[:book].should eq(book)
- #   end
- # end
 end
