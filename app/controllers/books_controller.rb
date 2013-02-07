@@ -9,10 +9,10 @@ class BooksController < ApplicationController
   def create
     @book = Book.new(params[:book])
     if @book.save
-      redirect_to @book
+      flash[:notice] = "The book was saved successfully"
+      redirect_to :action => "index"
     else
-      p @book.errors
-      render 'new'
+      render :action => "new"
     end
   end
 
