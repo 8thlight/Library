@@ -33,9 +33,9 @@ describe BooksController do
     end
 
     context "when the book saves successfully" do
-      it "sets a flash[:notice] message" do
+      it "sets a flash[:success] message" do
         post :create
-        flash[:notice].should eq("The book was saved successfully")
+        flash[:success].should eq("The book was saved successfully")
       end
 
       it "redirects to Book index" do
@@ -56,6 +56,11 @@ describe BooksController do
       it "renders the new template" do
         post :create
         response.should render_template("new")
+      end
+
+      it "sets a flash[:error] message" do
+        post :create
+        flash[:error].should eq("Please fill in the fields correctly")
       end
     end
   end

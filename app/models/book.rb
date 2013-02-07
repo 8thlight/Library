@@ -1,7 +1,7 @@
 class Book < ActiveRecord::Base
   attr_accessible :author, :isbn, :quantity, :title
 
-  validates :title, :presence => true,  :uniqueness => true
+  validates :title, :presence => { :message => "Please enter a title" },  :uniqueness => true
   validates :isbn, :length => {
     :maximum => 13,
     :minimum => 10
