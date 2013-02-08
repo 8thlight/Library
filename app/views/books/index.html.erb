@@ -1,1 +1,21 @@
 <h1>List of Books</h1>
+<table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <td>Title</td>
+      <td>Author</td>
+      <td>ISBN</td>
+      <td>Quantity</td>
+    </tr>
+  </thead>
+  <tbody>
+<% @books.each do |book| %>
+    <tr>
+      <td><%= book.title %></td>
+      <td><%= book.author %></td>
+      <td><%= book.isbn %></td>
+      <td><%= book.quantity %></td>
+    </tr>
+<% end %>
+  </tbody>
+</table>

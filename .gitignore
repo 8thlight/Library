@@ -14,13 +14,17 @@
 /log/*.log
 /tmp
 
+# Ignore all reports
+/reports
+
 *.com
 *.class
 *.dll
 *.exe
 *.o
 *.so
-
+*.swo
+*.swp
 *.7z
 *.dmg
 *.gz

@@ -44,6 +44,21 @@ describe BooksController do
       end
     end
 
+    context "listing books" do
+      it "assigns no books" do
+      	get :index
+	assigns(:books).should == []
+      end
+
+      it "lists a created book" do
+	book = Book.new
+        Book.should_receive(:all).and_return([book])
+        get :index
+	assigns(:books).should == [book]
+      end
+	
+    end
+
     context "when the book fails to save" do
       before do
         book.stub(:save).and_return(false)
