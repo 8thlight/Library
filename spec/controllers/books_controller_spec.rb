@@ -78,4 +78,34 @@ describe BooksController do
       end
     end
   end
+
+  describe "Show" do
+    it "should retrieve a certain book" do
+      get :edit, :id => "1"
+      response.should render_template("edit")
+    end
+  end
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

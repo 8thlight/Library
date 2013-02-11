@@ -1,0 +1,18 @@
+<h1>Edit Book Quantity</h1>
+
+  <%= form_for @book do |f| %>
+
+      <div><%= f.label :title %></div>
+
+      <div><%= f.label "Author" %></div>
+
+      <div><%= f.label "ISBN" %><%= @book.isbn %></div>
+
+      <div><%= f.label "Quantity" %></div>
+
+      <div><%= f.number_field "quantity" %></div>
+      <input type="submit">
+      <div></div>
+
+
+    <% end %>
