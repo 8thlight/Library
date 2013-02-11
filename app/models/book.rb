@@ -3,7 +3,7 @@ class Book < ActiveRecord::Base
 
   validates :title, :presence => { :message => "Please enter a title" },  :uniqueness => true
   validates :isbn, :length => {
-    :maximum => 13,
+    :maximum => 17,
     :minimum => 10
   }
   validates :isbn, :uniqueness => true

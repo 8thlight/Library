@@ -10,9 +10,15 @@
   <div class="navbar">
     <div class="navbar-inner">
       <h1>8LL</h1>
+      <ul class="nav">
+        <li><%= link_to "Home", books_path %></li>
+        <li><%= link_to "Add Book", new_book_path %></li>
+      </ul>
     </div>
   </div>
-<%= yield %>
+  <div class="container">
+    <%= yield %>
+  </div>
 
 </body>
 </html>

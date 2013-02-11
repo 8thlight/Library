@@ -13,16 +13,6 @@ describe "books/new.html.erb" do
     render
     rendered.should contain("Book")
   end
-
-  it "renders a form to create a message" do
-    render
-    rendered.should have_selector("form",
-                                  :method => "post",
-                                  :action => books_path
-                                 ) do |form|
-                                   form.should have_selector("input", :type => "submit")
-                                 end
-  end
   {
     :title => "Rails Tutorial",
     :author => "Michael Hartl",
@@ -38,13 +28,6 @@ describe "books/new.html.erb" do
                                   :value => value
                                  )
       end
-    end
-  end
-
-  it "renders labels" do
-    render
-    rendered.should have_selector("form") do |form|
-      form.should have_selector("label")
     end
   end
 end

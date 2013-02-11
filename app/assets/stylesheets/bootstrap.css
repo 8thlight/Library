@@ -6026,6 +6026,10 @@ a.badge:hover {
   display: none;
 }
 
+.register_book{
+  float:left;
+}
+
 .show {
   display: block;
 }
