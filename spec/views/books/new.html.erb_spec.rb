@@ -41,18 +41,6 @@ describe "books/new.html.erb" do
     end
   end
 
-  xit "renders a text field for the quantity textfield" do
-    book.stub(:quantity => 4)
-    render
-    rendered.should have_selector("form") do |form|
-      form.should have_selector("input",
-                                :type => "number",
-                                :name => "book[quantity]",
-                                :value => 4
-                               )
-    end
-  end
-
   it "renders labels" do
     render
     rendered.should have_selector("form") do |form|
