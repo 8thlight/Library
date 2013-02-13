@@ -2,6 +2,7 @@
 <table class="table table-bordered table-hover">
   <thead>
     <tr>
+      <td></td>
       <td>Title</td>
       <td>Author</td>
       <td>ISBN</td>
@@ -11,11 +12,13 @@
   <tbody>
 <% @books.each do |book| %>
     <tr>
-      <td></td>
-      <td></td>
+      <td><img src="<%= book.get_image %>"></td>
+      <td><%= book.get_title %></td>
+      <td><%= book.get_author %></td>
       <td><%= book.isbn %></td>
       <td><%= book.quantity %></td>
-      <td><%= link_to 'Edit' %></td>
+      <td><%= link_to 'Edit', edit_book_path(book) %>
+      <%= link_to 'Show', book_path(book) %></td>
     </tr>
 <% end %>
   </tbody>

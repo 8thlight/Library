@@ -1,4 +1,6 @@
-<h1>This is the show page<h1>
-
-
-    <%= GoogleBooks.search('The Great Gatsby') %>
+<p>Image:</p>
+<img src="<%= @book.get_image %>">
+<p>Title: <%= @book.get_title %></p>
+<p>Author: <%= @book.get_author %></p>
+<p>isbn: <%= @book.isbn %></p>
+<p>quantity: <%= @book.quantity %></p>

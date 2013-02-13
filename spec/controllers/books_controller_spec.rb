@@ -58,6 +58,18 @@ describe BooksController do
       end
     end
 
+    context "retrieve book information using isbn Google API" do
+      book = GoogleBooks.search('9781934356548').first
+
+      it "has the correct title" do
+        book.title.should == 'Agile Web Development With Rails'
+      end
+
+      it "has the correct author" do
+        book.authors.should == "Sam Ruby, Dave Thomas, David Heinemeier Hansson, Leon Breedt"
+      end
+    end
+
     context "when the book fails to save" do
       before do
         book.stub(:save).and_return(false)
