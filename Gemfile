@@ -14,9 +14,9 @@ group :test, :development do
   gem "simplecov-rcov"
 end
 
-#group :production do
-#  gem 'pg'
-#end
+group :production do
+  gem 'pg'
+end
 
 
 # Gems used only for assets and not required
