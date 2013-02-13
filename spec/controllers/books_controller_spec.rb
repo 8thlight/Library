@@ -50,8 +50,8 @@ describe BooksController do
 	    assigns(:books).should == []
     end
 
-      it "lists a created book" do
-      	book = Book.new
+      xit "lists a created book" do
+      	book = Book.new(isbn: "1234587987", quantity: 3)
         Book.should_receive(:order).and_return([book])
         get :index
 	      assigns(:books).should == [book]
@@ -76,13 +76,6 @@ describe BooksController do
         post :create
         flash[:error].should eq("Please fill in the fields correctly")
       end
-    end
-  end
-
-  describe "Show" do
-    it "should retrieve a certain book" do
-      get :edit, :id => "1"
-      response.should render_template("edit")
     end
   end
 end

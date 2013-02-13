@@ -23,10 +23,13 @@ class BooksController < ApplicationController
   end
 
   def edit
-    @book = Book.find(params[:isbn])
+    @book = Book.find(params[:id])
   end
 
   def update
-    @book = Book.find_by_id(params[:isbn])
+    @book = Book.find(params[:id])
+
+    @book.update_attributes(params[:book])
+      redirect_to :action => "index"
   end
 end
