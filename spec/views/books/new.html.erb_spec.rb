@@ -14,8 +14,6 @@ describe "books/new.html.erb" do
     rendered.should contain("Book")
   end
   {
-    :title => "Rails Tutorial",
-    :author => "Michael Hartl",
     :isbn => "1234567890"
   }.each do |attr, value|
     it "renders a text field for #{attr}" do

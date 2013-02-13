@@ -3,12 +3,6 @@ require 'spec_helper'
 describe Book do
 
   context "validations" do
-    it "should reject duplicate titles" do
-      Book.create!(title: "Rails Tut",author: "Michael Hartl",isbn: "12443258309",quantity: 1)
-      book_with_same_name = Book.new(title: "Rails Tut",author: "Anish Kothari",isbn: "1212333321",quantity: 31)
-      book_with_same_name.should_not be_valid
-    end
-
     it "should reject duplicate ISBNs" do
       Book.create!(title: "rspec Tutorial",author: "Michael Hartl",isbn: "1234542341",quantity: 1)
       book_with_same_isbn = Book.new(title: "Rails ",author: "Anish Kothari",isbn: "1234542341",quantity: 31)
@@ -16,8 +10,6 @@ describe Book do
     end
 
     {
-      :title => 1,
-      :author => 1,
       :quantity => 2
     }.each do |attr, num|
       it "should validate the presence of #{attr}" do

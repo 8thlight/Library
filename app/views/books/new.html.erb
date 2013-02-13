@@ -3,13 +3,9 @@
 
       <%= render 'shared/error_messages' %>
 
-      <div><%= f.text_field :title, placeholder: "Title" %></div>
-
-      <div><%= f.text_field :author, placeholder: "Author" %></div>
-
       <div><%= f.text_field :isbn, placeholder: "ISBN" %></div>
 
-      <div><%= f.text_field :quantity, placeholder: "quantity", class: "input-small" %></div>
+      <div><%= f.number_field :quantity, placeholder: "Quantity", min: 0%></div>
 
       <div><%= f.submit "Register Book", class: "btn btn-primary" %></div>
 

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "books/edit.html.erb" do
 
-  it "displays the correct isbn number" do
+  xit "displays the correct isbn number" do
     book = mock_model("Book").as_new_record.as_null_object
     assign(:book, book)
     book.stub(:isbn => "978-1-93435-637-1")

@@ -2,16 +2,12 @@
 
   <%= form_for @book do |f| %>
 
-      <div><%= f.label :title %></div>
-
-      <div><%= f.label "Author" %></div>
-
       <div><%= f.label "ISBN" %><%= @book.isbn %></div>
 
       <div><%= f.label "Quantity" %></div>
 
-      <div><%= f.number_field "quantity" %></div>
-      <input type="submit">
+      <div><%= f.number_field "quantity", min: 0%></div>
+      <input type="submit" class="btn btn-primary">
       <div></div>
 
 

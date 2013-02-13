@@ -14,8 +14,6 @@
 ActiveRecord::Schema.define(:version => 20130204195503) do
 
   create_table "books", :force => true do |t|
-    t.string   "title"
-    t.string   "author"
     t.string   "isbn"
     t.integer  "quantity"
     t.datetime "created_at", :null => false

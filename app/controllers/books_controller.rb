@@ -4,7 +4,8 @@ class BooksController < ApplicationController
   end
 
   def index
-    @books = Book.order("title ASC")
+    @books = Book.all
+    #@books = Book.order("title ASC")
   end
 
   def create
@@ -22,9 +23,10 @@ class BooksController < ApplicationController
   end
 
   def edit
-    @book = Book.find_by_id(params[:id])
+    @book = Book.find(params[:isbn])
   end
 
   def update
+    @book = Book.find_by_id(params[:isbn])
   end
 end
