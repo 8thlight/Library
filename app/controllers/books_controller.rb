@@ -20,11 +20,11 @@ class BooksController < ApplicationController
   end
 
   def show
-    @book = Book.find(params[:id])
+    @book = Book.find_by_isbn(params[:isbn])
   end
 
   def edit
-    @book = Book.find(params[:id])
+    @book = Book.find_by_isbn(params[:isbn])
   end
 
   def update

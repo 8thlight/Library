@@ -17,8 +17,8 @@
       <td><%= book.get_author %></td>
       <td><%= book.isbn %></td>
       <td><%= book.quantity %></td>
-      <td><%= link_to 'Edit', edit_book_path(book) %>
-      <%= link_to 'Show', book_path(book) %></td>
+      <td><%= link_to 'Edit', edit_book_path(book.isbn) %>
+      <%= link_to 'Show', book_path(book.isbn) %></td>
     </tr>
 <% end %>
   </tbody>

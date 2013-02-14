@@ -12,6 +12,7 @@ group :test, :development do
   gem "webrat"
   gem "simplecov"
   gem "simplecov-rcov"
+  gem 'pry'
 end
 
 group :production do
