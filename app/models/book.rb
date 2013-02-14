@@ -9,14 +9,14 @@ class Book < ActiveRecord::Base
   validates :quantity, :presence => true, :numericality => { :greater_than_or_equal_to => 0 }
 
   def get_title
-     GoogleBooks.search("isbn:#{isbn}", {options_hash}, ENV["PROXIMO_URL"].first.title
+     GoogleBooks.search("isbn:#{isbn}", ENV["PROXIMO_URL"].first.title
   end
 
   def get_author
-      GoogleBooks.search("isbn:#{isbn}", {options_hash}, ENV["PROXIMO_URL"]).first.authors
+      GoogleBooks.search("isbn:#{isbn}", ENV["PROXIMO_URL"]).first.authors
   end
 
   def get_image
-    GoogleBooks.search("isbn:#{isbn}", {options_hash}, ENV["PROXIMO_URL"]).first.image_link
+    GoogleBooks.search("isbn:#{isbn}", ENV["PROXIMO_URL"]).first.image_link
   end
 end
