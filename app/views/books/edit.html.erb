@@ -1,6 +1,6 @@
 <h1>Edit Book Quantity</h1>
 
-<%= form_for @book, :url => update_book_path(@book.isbn) do |f| %>
+<%= form_for @book, :url => book_path(@book.isbn) do |f| %>
 
       <img src="<%= @book.get_image %>">
 
