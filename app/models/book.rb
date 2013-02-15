@@ -28,7 +28,7 @@ class Book < ActiveRecord::Base
 
   def validate_isbn
     if check_isbn != true
-      errors.add(:isbn, 'error on isbn')
+      errors.add(:isbn, 'isbn does not exist')
       return false
     end
   end

@@ -27,9 +27,11 @@ class BooksController < ApplicationController
   end
 
   def update
-    @book = Book.find(params[:id])
-
-    @book.update_attributes(params[:book])
+    @book = Book.find_by_isbn(params[:isbn])
+    if @book.update_attributes(params[:book])
       redirect_to :action => "index"
+    else
+      render "edit"
+    end
   end
 end

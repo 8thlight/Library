@@ -1,6 +1,6 @@
 <h1>Edit Book Quantity</h1>
 
-  <%= form_for @book do |f| %>
+<%= form_for @book, :url => update_book_path(@book.isbn) do |f| %>
 
       <img src="<%= @book.get_image %>">
 
@@ -13,5 +13,6 @@
       <div><%= f.label "Quantity" %></div>
 
       <div><%= f.number_field "quantity", min: 0%></div>
+
       <input type="submit" class="btn btn-primary">
   <% end %>
