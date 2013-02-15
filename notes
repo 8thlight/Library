@@ -39,4 +39,3 @@ index page with a list of books alphabetical
                                 :name => "book[quantity]",
                                 :value => 4
                                )
-
