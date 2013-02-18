@@ -13,7 +13,7 @@
 <% @books.each do |book| %>
     <tr>
       <td><img src="<%= book.get_image %>"></td>
-      <td><%= book.get_title %></td>
+      <td><%= link_to book.get_title, book_path(book.isbn) %></td>
       <td><%= book.get_author %></td>
       <td><%= book.isbn %></td>
       <td><%= book.quantity %></td>
