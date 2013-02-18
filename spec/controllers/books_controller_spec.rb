@@ -50,9 +50,9 @@ describe BooksController do
 	    assigns(:books).should == []
     end
 
-      xit "lists a created book" do
-      	book = Book.new(isbn: "1234587987", quantity: 3)
-        Book.should_receive(:order).and_return([book])
+      it "lists a created book" do
+      	book = Book.new(isbn: "9781934356548", quantity: 3)
+        Book.should_receive(:all).and_return([book])
         get :index
 	      assigns(:books).should == [book]
       end
