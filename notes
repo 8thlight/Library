@@ -39,3 +39,6 @@ index page with a list of books alphabetical
                                 :name => "book[quantity]",
                                 :value => 4
                                )
+
+  <script type="text/javascript" src="assets/javascripts/__jquery.tablesorter/jquery-latest.js"></script>
+  <script type="text/javascript" src="/../../../assets/javascripts/__jquery.tablesorter/jquery.tablesorter.js"></script>

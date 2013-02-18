@@ -14,3 +14,5 @@
 //= require jquery_ujs
 //= require_tree .
 //= require bootstrap
+//= require jquery.tablesorter.js
+//= require jquery-latest.js
