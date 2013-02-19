@@ -9,6 +9,29 @@ describe BooksController do
     end
   end
 
+  describe "GET index" do
+    context "listing books" do
+      it "assigns no books" do
+        get :index
+        assigns(:books).should == []
+      end
+
+      it "lists a created book" do
+        book = Book.new(isbn: "9781934356548", quantity: 3)
+        Book.should_receive(:all).and_return([book])
+        get :index
+        assigns(:books).should == [book]
+      end
+
+      it "assigns books with their title, authors and images" do
+        book = Book.new(isbn: "9780137081073", quantity: 3)
+        Book.should_receive(:all).and_return([book])
+        get :index
+        google_books = assigns(:google_books)
+        google_books.first.title.should == "Clean Code: A Handbook of Agile Software Craftsmanship"
+      end
+    end
+  end
 
   describe "POST create" do
 
@@ -44,19 +67,6 @@ describe BooksController do
       end
     end
 
-    context "listing books" do
-      it "assigns no books" do
-      get :index
-	    assigns(:books).should == []
-    end
-
-      it "lists a created book" do
-      	book = Book.new(isbn: "9781934356548", quantity: 3)
-        Book.should_receive(:all).and_return([book])
-        get :index
-	      assigns(:books).should == [book]
-      end
-    end
 
     context "retrieve book information using isbn Google API" do
       book = GoogleBooks.search('9781934356548').first

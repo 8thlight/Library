@@ -10,23 +10,23 @@ class Book < ActiveRecord::Base
   validates :isbn, :uniqueness => true
   validates :quantity, :presence => true, :numericality => { :greater_than_or_equal_to => 0 }
 
-  API_KEY = "AIzaSyAqerTH3Ee8TcKFLn695LAu8HQm9SBFrn0"
+  #API_KEY = "AIzaSyAqerTH3Ee8TcKFLn695LAu8HQm9SBFrn0"
 
-  def get_title
-    GoogleBooks.search("#{isbn}", :api_key => API_KEY).first.title
-  end
+  #def get_title
+    #GoogleBooks.search("#{isbn}", :api_key => API_KEY).first.title
+  #end
 
-  def get_author
-    GoogleBooks.search("#{isbn}", :api_key => API_KEY).first.authors
-  end
+  #def get_author
+    #GoogleBooks.search("#{isbn}", :api_key => API_KEY).first.authors
+  #end
 
-  def get_image
-    GoogleBooks.search("#{isbn}", :api_key => API_KEY).first.image_link
-  end
+  #def get_image
+    #GoogleBooks.search("#{isbn}", :api_key => API_KEY).first.image_link
+  #end
 
-  def check_isbn
-    GoogleBooks.search("#{isbn}", :api_key => API_KEY).first != nil
-  end
+  #def check_isbn
+    #GoogleBooks.search("#{isbn}", :api_key => API_KEY).first != nil
+  #end
 
   def validate_isbn
     if check_isbn != true

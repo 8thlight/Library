@@ -5,6 +5,7 @@ class BooksController < ApplicationController
 
   def index
     @books = Book.all
+    @google_books = @books.map { |book| BookAPI.find(book.isbn) }
   end
 
   def create

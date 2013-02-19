@@ -10,13 +10,13 @@
     </tr>
   </thead>
   <tbody>
-<% @books.each do |book| %>
+<% @google_books.each_with_index do |book, index| %>
     <tr>
-      <td><img src="<%= book.get_image %>"></td>
-      <td><%= link_to book.get_title, book_path(book.isbn) %></td>
-      <td><%= book.get_author %></td>
+      <td><img src="<%= book.image_link %>"></td>
+      <td><%= link_to book.title, book_path(book.isbn) %></td>
+      <td><%= book.authors %></td>
       <td><%= book.isbn %></td>
-      <td><%= book.quantity %></td>
+      <td><%= @books[index].quantity %></td>
       <td><%= link_to 'Edit', edit_book_path(book.isbn) %>
       <%= link_to 'Show', book_path(book.isbn) %></td>
     </tr>
