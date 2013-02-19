@@ -25,7 +25,7 @@ describe BooksController do
 
       it "assigns books with their title, authors and images" do
         book = Book.new(isbn: "9780137081073", quantity: 3)
-        Book.should_receive(:all).and_return([book])
+        Book.stub(:all).and_return([book])
         get :index
         google_books = assigns(:google_books)
         google_books.first.title.should == "Clean Code: A Handbook of Agile Software Craftsmanship"
@@ -101,26 +101,3 @@ describe BooksController do
     end
   end
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
