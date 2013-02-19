@@ -17,7 +17,7 @@ describe Book do
       end
     end
 
-    it "should validate the quantity is an integer" do
+    it "should check the quantity is an integer" do
       book = Book.new(isbn: "1234123456", quantity: "one")
       book.should have(1).error_on(:quantity)
     end
