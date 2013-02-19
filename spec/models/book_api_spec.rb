@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe BookAPI do
   before do
-    Book = Struct.new(:title, :authors)
-    book = Book.new
+    BookStruct = Struct.new(:title, :authors)
+    book = BookStruct.new
     book.title = "Agile Web Development With Rails"
     book.authors = "Sam Ruby, Dave Thomas, David Heinemeier Hansson, Leon Breedt"
     BookAPI.stub(:find).and_return(book)
