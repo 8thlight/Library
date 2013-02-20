@@ -24,7 +24,7 @@ describe Book do
 
     it "should invalidate ISBNs shorter than 10 digits and longer than 13 digits" do
       book = Book.new(isbn: "1", quantity: 1)
-      book.should have(1).error_on(:isbn)
+      book.should have(2).error_on(:isbn)
     end
 
     it "should check ISBN does not exists" do
