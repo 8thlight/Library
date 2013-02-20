@@ -9,6 +9,7 @@ class BooksController < ApplicationController
 
   def create
     @book = Book.new(params[:book])
+    @book.quantity_left = @book.quantity
     if @book.save
       flash[:success] = "The book was saved successfully"
       redirect_to :action => "index"
@@ -16,6 +17,18 @@ class BooksController < ApplicationController
       flash[:error] = "Please fill in the fields correctly"
       render :action => "new"
     end
+  end
+
+  #remember to insert flash notice when user can't check out
+  def check_out
+    @book = Book.find_by_isbn(params[:isbn])
+    if @book.quantity_left > 0
+      @book.quantity_left -= 1
+      @book.user << User.find(session["warden.user.user.key"][1])
+    end
+      require 'pry'
+      binding.pry
+   redirect_to :action => "index"
   end
 
   def show

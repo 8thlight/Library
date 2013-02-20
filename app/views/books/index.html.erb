@@ -18,7 +18,10 @@
       <td><%= book.isbn %></td>
       <td><%= book.quantity %></td>
       <td><%= link_to 'Edit', edit_book_path(book.isbn) %>
-      <%= link_to 'Show', book_path(book.isbn) %></td>
+      <%= link_to 'Show', book_path(book.isbn) %>
+      <% if user_signed_in? %>
+        <%= link_to "Check out", check_out_path(book.isbn) %></td>
+      <% end %>
     </tr>
 <% end %>
   </tbody>

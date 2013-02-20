@@ -1,6 +1,6 @@
 class Book < ActiveRecord::Base
-  include GoogleBooks
-  attr_accessible :isbn, :quantity
+  has_and_belongs_to_many :user
+  attr_accessible :isbn, :quantity, :quantity_left
 
   validates :isbn, :length => {
     :maximum => 17,
