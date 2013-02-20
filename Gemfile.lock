@@ -183,7 +183,7 @@ DEPENDENCIES
   devise
   googlebooks
   jquery-rails
-  omniauth
+  omniauth (~> 1.0)
   omniauth-google-oauth2
   pg
   pry
