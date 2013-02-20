@@ -24,10 +24,9 @@ class BooksController < ApplicationController
     @book = Book.find_by_isbn(params[:isbn])
     if @book.quantity_left > 0
       @book.quantity_left -= 1
+      @book.update_attributes(params[:book])
       @book.user << User.find(session["warden.user.user.key"][1])
     end
-      require 'pry'
-      binding.pry
    redirect_to :action => "index"
   end
 

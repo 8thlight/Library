@@ -7,6 +7,7 @@
       <th>Author</th>
       <th>ISBN</th>
       <th>Quantity</th>
+      <th>Quantity Left</th>
     </tr>
   </thead>
   <tbody>
@@ -17,6 +18,7 @@
       <td><%= book.get_author %></td>
       <td><%= book.isbn %></td>
       <td><%= book.quantity %></td>
+      <td><%= book.quantity_left %></td>
       <td><%= link_to 'Edit', edit_book_path(book.isbn) %>
       <%= link_to 'Show', book_path(book.isbn) %>
       <% if user_signed_in? %>
