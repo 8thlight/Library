@@ -1,4 +1,5 @@
 class Book < ActiveRecord::Base
+  include GoogleBooks
   attr_accessible :isbn, :quantity
 
   validates :isbn, :length => {
@@ -13,19 +14,19 @@ class Book < ActiveRecord::Base
   API_KEY = "AIzaSyAqerTH3Ee8TcKFLn695LAu8HQm9SBFrn0"
 
   def get_title
-    GoogleBooks.search("#{isbn}", :api_key => API_KEY).first.title
+    GoogleBooks.search("isbn:#{isbn}", {:count => 1}, :api_key => API_KEY).title
   end
 
   def get_author
-    GoogleBooks.search("#{isbn}", :api_key => API_KEY).first.authors
+    GoogleBooks.search("isbn:#{isbn}", {:count => 1}, :api_key => API_KEY).authors
   end
 
   def get_image
-    GoogleBooks.search("#{isbn}", :api_key => API_KEY).first.image_link
+    GoogleBooks.search("isbn:#{isbn}", {:count => 1}, :api_key => API_KEY).image_link
   end
 
   def check_isbn
-    GoogleBooks.search("#{isbn}", :api_key => API_KEY).first != nil
+    GoogleBooks.search("isbn:#{isbn}", {:count => 1}, :api_key => API_KEY) != nil
   end
 
   def validate_isbn
