@@ -14,19 +14,19 @@ class Book < ActiveRecord::Base
   API_KEY = "AIzaSyAqerTH3Ee8TcKFLn695LAu8HQm9SBFrn0"
 
   def get_title
-    GoogleBooks.search("isbn:#{isbn}", :api_key => API_KEY).first.title
+    google_book.title
   end
 
   def get_author
-    GoogleBooks.search("isbn:#{isbn}", :api_key => API_KEY).first.authors
+    google_book.authors
   end
 
   def get_image
-    GoogleBooks.search("isbn:#{isbn}", :api_key => API_KEY).first.image_link
+    google_book.image_link
   end
 
   def check_isbn
-    GoogleBooks.search("isbn:#{isbn}", :api_key => API_KEY).first != nil
+    google_book.isbn != nil
   end
 
   def validate_isbn
@@ -36,8 +36,10 @@ class Book < ActiveRecord::Base
     end
   end
 
-  #def get_google_api(attr)
-  #  GoogleBooks.search("#{isbn}", options[:api_key] = API_KEY).first.attr
-  #end
+  private
+
+  def google_book
+    @google_book ||= GoogleBooks.search("isbn:#{isbn}", :api_key => API_KEY).first
+  end
 end
 

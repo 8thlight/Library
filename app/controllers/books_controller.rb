@@ -19,7 +19,6 @@ class BooksController < ApplicationController
     end
   end
 
-  #remember to insert flash notice when user can't check out
   def check_out
     @book = Book.find_by_isbn(params[:isbn])
     if @book.quantity_left > 0
