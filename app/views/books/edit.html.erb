@@ -10,6 +10,8 @@
 
       <div><%= @book.isbn %></div>
 
+      <div><%= @book.quantity_left %></div>
+
       <div><%= f.label "Quantity" %></div>
 
       <div><%= f.number_field "quantity", min: 0%></div>

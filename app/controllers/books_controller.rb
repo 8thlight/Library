@@ -10,6 +10,7 @@ class BooksController < ApplicationController
   def create
     @book = Book.new(params[:book])
     @book.quantity_left = @book.quantity
+    require 'pry'
     if @book.save
       flash[:success] = "The book was saved successfully"
       redirect_to :action => "index"
@@ -41,6 +42,9 @@ class BooksController < ApplicationController
 
   def update
     @book = Book.find_by_isbn(params[:isbn])
+    @book.quantity_left += ((params[:book][:quantity].to_i) - @book.quantity)
+    require 'pry'
+    binding.pry
     @book.update_attributes(params[:book])
       redirect_to :action => "show"
   end

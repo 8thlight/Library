@@ -44,6 +44,29 @@ describe BooksController do
       end
     end
 
+    describe "when book is updated" do
+      context "when book updates successfully" do
+        before(:each) do
+          @book = mock_model(Book)
+          Book.stub(:find_by_isbn).with("9781934356548").and_return(@book)
+        end
+
+        it "should find book and return object" do
+          Book.should_receive(:find_by_isbn).with("9781934356548").and_return(@book)
+          #put :update, :isbn => "9781934356548", :book => { isbn: "9781934356548",
+          #                                                  quantity: 2,
+          #                                                  quantity_left: 2
+          #                                                }
+        end
+
+        xit "redirects to the show page" do
+          put :update, :isbn => "9781934356548"
+          response.should redirect_to(book_path)
+        end
+
+      end
+    end
+
     context "listing books" do
       it "assigns no books" do
       get :index
