@@ -45,6 +45,7 @@ describe BooksController do
     end
 
     describe "when book is updated" do
+      pending
       context "when book updates successfully" do
         before(:each) do
           @book = mock_model(Book)
