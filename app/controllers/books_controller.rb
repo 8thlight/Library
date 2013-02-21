@@ -26,8 +26,10 @@ class BooksController < ApplicationController
       @book.quantity_left -= 1
       @book.update_attributes(params[:book])
       @book.user << User.find(session["warden.user.user.key"][1])
+      flash[:notice] = "Checked out successfully!"
+    else
+      flash[:notice] = "Sorry, that book is unavailable to be checked out."
     end
-   redirect_to :action => "index"
   end
 
   def show

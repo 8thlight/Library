@@ -1,44 +1,4 @@
-book:  title, author, ISBN, quantity
-
-list of things to consider
-
-bootstrap
-flash messages
-index page with a list of books alphabetical
+Google API lower request
+timestamp on checked out, has and belong to many relationship
 
 
-<%= form_for(@book) do |f| %>
-  <%= f.label :title %>
-  <%= f.text_field :title %>
-
-  <%= f.label :author %>
-  <%= f.text_field :author %>
-
-  <%= f.label :isbn %>
-  <%= f.text_field :isbn %>
-
-  <%= f.label :quantity %>
-  <%= f.text_field :quantity %>
-
-  <%= f.submit "Register book" %>
-<% end %>
-
-
-  form.should have_selector("input",
-                                :type => "text",
-                                :name => "book[author]",
-                                :value => "Michael Hartl"
-                               )
-      form.should have_selector("input",
-                                :type => "text",
-                                :name => "book[isbn]",
-                                :value => "1234567890"
-                               )
-      form.should have_selector("input",
-                                :type => "text",
-                                :name => "book[quantity]",
-                                :value => 4
-                               )
-
-  <script type="text/javascript" src="assets/javascripts/__jquery.tablesorter/jquery-latest.js"></script>
-  <script type="text/javascript" src="/../../../assets/javascripts/__jquery.tablesorter/jquery.tablesorter.js"></script>

@@ -4,3 +4,5 @@
 <p>Author: <%= @book.get_author %></p>
 <p>isbn: <%= @book.isbn %></p>
 <p>quantity: <%= @book.quantity %></p>
+<p>Quantity Left: <%= @book.quantity_left %></p>
+<%= link_to "Check out", check_out_path(@book.isbn) %>
