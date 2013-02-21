@@ -24,8 +24,6 @@ class BooksController < ApplicationController
     if @book.quantity_left > 0
       @book.quantity_left -= 1
       @book.update_attributes(params[:book])
-      require 'pry'
-      binding.pry
       @book.user << User.find(session["warden.user.user.key"][1])
       flash[:notice] = "Checked out successfully!"
     else
@@ -44,8 +42,6 @@ class BooksController < ApplicationController
   def update
     @book = Book.find_by_isbn(params[:isbn])
     @book.quantity_left += ((params[:book][:quantity].to_i) - @book.quantity)
-    require 'pry'
-    binding.pry
     @book.update_attributes(params[:book])
       redirect_to :action => "show"
   end
