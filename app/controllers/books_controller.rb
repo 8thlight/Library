@@ -10,7 +10,6 @@ class BooksController < ApplicationController
   def create
     @book = Book.new(params[:book])
     @book.quantity_left = @book.quantity
-    require 'pry'
     if @book.save
       flash[:success] = "The book was saved successfully"
       redirect_to :action => "index"
@@ -25,6 +24,8 @@ class BooksController < ApplicationController
     if @book.quantity_left > 0
       @book.quantity_left -= 1
       @book.update_attributes(params[:book])
+      require 'pry'
+      binding.pry
       @book.user << User.find(session["warden.user.user.key"][1])
       flash[:notice] = "Checked out successfully!"
     else
