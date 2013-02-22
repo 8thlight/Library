@@ -46,6 +46,15 @@ class BooksController < ApplicationController
 
   def show
     @book = Book.find_by_isbn(params[:isbn])
+    @book_history = []
+    @users_borrowed = {}
+    CheckOut.all.each do |check_outs|
+      @book_history << check_outs if check_outs.book_id == @book.id
+    end
+
+    @book_history.each do |book|
+      @users_borrowed[User.find_by_id(book.user_id).name] = book.check_out_date
+    end
   end
 
   def edit
