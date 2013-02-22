@@ -1,5 +1,6 @@
 class Book < ActiveRecord::Base
-  has_and_belongs_to_many :user
+  has_many :check_outs
+  has_many :users, :through => :checkouts
   attr_accessible :isbn, :quantity, :quantity_left
 
   validates :isbn, :length => {

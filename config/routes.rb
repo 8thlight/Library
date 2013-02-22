@@ -14,8 +14,8 @@ Library::Application.routes.draw do
   put '/books/:isbn' => 'books#update'
 
 
-  get '/books/:isbn/check_out' => 'books#check_out', as: 'check_out'
-  post '/books/:isbn/check_out' => 'books#check_out'
+  get 'book/:isbn/check_out' => 'books#check_out', as: 'check_out'
+  post 'book/:isbn/check_out' => 'books#check_out'
 
 end
 
