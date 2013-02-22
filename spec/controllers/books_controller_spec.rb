@@ -90,6 +90,27 @@ describe BooksController do
       end
     end
   end
+
+  describe "POST check_out" do
+    before(:each) do
+      @book = mock_model(Book, :update_attributes => true).as_null_object
+    end
+
+    xit "should find book and return object" do
+      Book.should_receive(:find_by_isbn).with("9781934356562").and_return(@book)
+      post :check_out, :isbn => "9781934356562", :book => {}
+    end
+
+    xit "should redirect to the checkout page" do
+      put :check_out, :isbn => "9781934356562", :book => {}
+      response.should render_template("check_out")
+    end
+
+    xit "should have a flash notice" do
+      post :check_out, :isbn => "9781934356562", :book => {}
+      flash[:notice].should_not be_blank
+    end
+  end
 end
 
 

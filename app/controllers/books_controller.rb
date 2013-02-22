@@ -19,21 +19,12 @@ class BooksController < ApplicationController
     end
   end
 
-  #def check_out
-  #  @book = Book.find_by_isbn(params[:isbn])
-  #  if @book.quantity_left > 0
-  #    @book.quantity_left -= 1
-  #    @book.update_attributes(params[:book])
-  #    @book.user << User.find(session["warden.user.user.key"][1])
-  #    flash[:notice] = "Checked out successfully!"
-  #  else
-  #    flash[:notice] = "Sorry, that book is unavailable to be checked out."
-  #  end
-  #end
-
   def check_out
+    #@book = Book.find_by_isbn(params[:isbn])
+    #flash[:notice] = "Sorry, that book  is unavailable to be checked out."
+
     @book = Book.find_by_isbn(params[:isbn])
-    @user_id = User.find_by_id(session["warden.user.user.key"][1]).id
+    @user_id = User.find_by_id(session["warden.user.user.key"][0]).id
     @check_out = CheckOut.new(book_id: @book.id, user_id: @user_id, check_out_date: Time.now)
     if @check_out.save
       @book.quantity_left -= 1

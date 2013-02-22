@@ -6,10 +6,11 @@
 <p>quantity: <%= @book.quantity %></p>
 <p>Quantity Left: <%= @book.quantity_left %></p>
 
-<%= @users_borrowed.each do |user, check_out_time| %>
-  <%= puts user %><%= puts check_out_time %>
-<% end %>
-
-
+<p>Currently borrowing users</p>
+<ul>
+  <% @users_borrowed.each do |user, check_out_time| %>
+      <li><%= user %> <%= check_out_time %></li>
+  <% end %>
+</ul>
 
 <%= link_to "Check out", check_out_path(@book.isbn) %>
