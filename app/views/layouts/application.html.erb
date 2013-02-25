@@ -26,6 +26,7 @@
         <% else %>
           <li><%= link_to "Sign up", new_user_registration_path %> or <%= link_to "sign in", new_user_session_path %></li>
         <% end %>
+        <li><%= link_to "sign in with Google", user_omniauth_authorize_path(:google_oauth2) %></li>
       </ul>
     </div>
   </div>
