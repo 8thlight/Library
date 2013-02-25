@@ -20,9 +20,6 @@ class BooksController < ApplicationController
   end
 
   def check_out
-    #@book = Book.find_by_isbn(params[:isbn])
-    #flash[:notice] = "Sorry, that book  is unavailable to be checked out."
-
     @book = Book.find_by_isbn(params[:isbn])
     @user_id = User.find_by_id(session["warden.user.user.key"][1]).id
     @check_out = CheckOut.new(book_id: @book.id, user_id: @user_id, check_out_date: Time.now)
@@ -39,12 +36,14 @@ class BooksController < ApplicationController
     @book = Book.find_by_isbn(params[:isbn])
     @book_history = []
     @users_borrowed = {}
+    @name = []
+    @date = []
     CheckOut.all.each do |check_outs|
       @book_history << check_outs if check_outs.book_id == @book.id
     end
 
-    @book_history.each do |book|
-      @users_borrowed[User.find_by_id(book.user_id).name] = book.check_out_date
+    @book_history.each do |book_history|
+      @users_borrowed[(User.find_by_id(book_history.user_id).name)] = book_history.check_out_date
     end
   end
 
