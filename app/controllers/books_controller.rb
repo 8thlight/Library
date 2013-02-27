@@ -21,9 +21,9 @@ class BooksController < ApplicationController
 
   def check_out
     @book = Book.find_by_isbn(params[:isbn])
-    @user_id = User.find_by_id(session["warden.user.user.key"][1]).id
+    @user_id = User.find_by_id(session[:user_id]).id
     @check_out = CheckOut.new(book_id: @book.id, user_id: @user_id, check_out_date: Time.now)
-    if @check_out.save
+    if @check_out.save && @book.quantity_left > 0
       @book.quantity_left -= 1
       @book.update_attributes(params[:book])
       flash[:notice] = "Checked out #{@book.get_title} successfully!"

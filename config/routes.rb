@@ -15,5 +15,11 @@ Library::Application.routes.draw do
   get 'book/:isbn/check_out' => 'books#check_out', as: 'check_out'
   post 'book/:isbn/check_out' => 'books#check_out'
 
+  match '/auth/:provider/callback' => 'sessions#create'
+  match '/auth/failure' => 'sessions#failure'
+
+  match '/signout' => 'sessions#destroy', :as => :signout
+  match '/signin' => 'sessions#new', :as => :signin
+
 end
 

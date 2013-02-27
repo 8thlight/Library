@@ -15,11 +15,10 @@
         <li><%= link_to "Add Book", new_book_path  %></li>
         <% if user_signed_in? %>
           <li>Signed in as <%= current_user.email %>. Not you?</li>
-          <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
+          <li><%= link_to "Sign out", signout_path, :method => :delete %></li>
         <% else %>
-          <li><%= link_to "Sign up", new_user_registration_path %> or <%= link_to "sign in", new_user_session_path %></li>
-        <% end %>
         <li><%= link_to "sign in with Google", user_omniauth_authorize_path(:google_oauth2) %></li>
+        <% end %>
       </ul>
     </div>
   </div>

@@ -31,6 +31,9 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
+
 gem 'awesome_print'
 gem 'googlebooks'
 gem 'jquery-rails'
