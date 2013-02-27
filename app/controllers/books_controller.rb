@@ -23,8 +23,6 @@ class BooksController < ApplicationController
     @book = Book.find_by_isbn(params[:isbn])
     @user_id = User.find_by_id(session[:user_id]).id
     @check_out = CheckOut.new(book_id: @book.id, user_id: @user_id, check_out_date: Time.now)
-    require 'pry'
-    binding.pry
     if @check_out.save && @book.quantity_left > 0
       @book.quantity_left -= 1
       @book.update_attributes(params[:book])

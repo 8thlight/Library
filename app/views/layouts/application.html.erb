@@ -17,7 +17,7 @@
           <li>Signed in as <%= current_user.email %>. Not you?</li>
           <li><%= link_to "Sign out", signout_path, :method => :delete %></li>
         <% else %>
-        <li><%= link_to "sign in with Google", user_omniauth_authorize_path(:google_oauth2) %></li>
+        <li><%= link_to "sign in with Google", signin_path %></li>
         <% end %>
       </ul>
     </div>

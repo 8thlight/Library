@@ -43,9 +43,9 @@ describe Book do
       subject.should have(1).error_on(:isbn)
     end
 
-    xit "should check ISBN does not exists" do
+    it "should check ISBN does not exists" do
       book = Book.new(isbn: "9780321287654", quantity: 1)
-      subject.check_isbn.should be_false
+      subject.validate_isbn.should be_false
     end
 
     it "should check if there is an error if the ISBN does not exist" do
