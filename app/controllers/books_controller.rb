@@ -22,14 +22,14 @@ class BooksController < ApplicationController
   def show
     @book = Book.find_by_isbn(params[:isbn])
     @users_borrowed = {}
-    @book_history = Checkout.where(book_id: @book.id)
+    @checked_out_books = Checkout.where(book_id: @book.id)
 
-    checked_out(@book_history, @users_borrowed) unless @book_history.empty?
+    checked_out(@checked_out_books, @users_borrowed) unless @checked_out_books.empty?
   end
 
   def checked_out(books, users)
     books.each do |book|
-      users[(User.find_by_id(book.user_id).name)] = book.check_out_date
+      users[book.user.name] = book.check_out_date
     end
   end
 
