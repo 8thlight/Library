@@ -11,9 +11,10 @@ Library::Application.routes.draw do
 
   put '/books/:isbn' => 'books#update'
 
+  get 'book/:isbn/check_out' => 'checkouts#create', as: 'check_out'
+  post '/checkouts' => 'checkouts#create'
 
-  get 'book/:isbn/check_out' => 'books#check_out', as: 'check_out'
-  post 'book/:isbn/check_out' => 'books#check_out'
+  get '/checkouts' => 'checkouts#index'
 
   match '/auth/:provider/callback' => 'sessions#create'
   match '/auth/failure' => 'sessions#failure'
