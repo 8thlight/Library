@@ -40,35 +40,21 @@ describe BooksController do
 
       it "redirects to Book index" do
         post :create
-        response.should redirect_to(:action => "index")
+        response.should redirect_to(root_path)
       end
     end
 
-    context "listing books" do
-      it "assigns no books" do
-      get :index
-	    assigns(:books).should == []
+  context "retrieve book information using isbn Google API" do
+    book = GoogleBooks.search('9781934356548').first
+
+    it "has the correct title" do
+      book.title.should == 'Agile Web Development With Rails'
     end
 
-      it "lists a created book" do
-      	book = Book.new(isbn: "9781934356548", quantity: 3)
-        Book.should_receive(:all).and_return([book])
-        get :index
-	      assigns(:books).should == [book]
-      end
+    it "has the correct author" do
+      book.authors.should == "Sam Ruby, Dave Thomas, David Heinemeier Hansson, Leon Breedt"
     end
-
-    context "retrieve book information using isbn Google API" do
-      book = GoogleBooks.search('9781934356548').first
-
-      it "has the correct title" do
-        book.title.should == 'Agile Web Development With Rails'
-      end
-
-      it "has the correct author" do
-        book.authors.should == "Sam Ruby, Dave Thomas, David Heinemeier Hansson, Leon Breedt"
-      end
-    end
+  end
 
     context "when the book fails to save" do
       before do
