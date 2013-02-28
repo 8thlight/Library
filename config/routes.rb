@@ -1,6 +1,11 @@
 Library::Application.routes.draw do
 
-  root :to => 'books#index'
+#  get "static/index"
+
+  root :to => 'static#index'
+
+  get 'user/return/:isbn' => 'return#create', as: 'return_book'
+  post '/return' => 'return#create'
 
   get '/books/new' => 'books#new', as: 'new_book'
   post '/books' => 'books#create'
@@ -21,6 +26,8 @@ Library::Application.routes.draw do
 
   match '/signout' => 'sessions#destroy', :as => :signout
   match '/signin' => 'sessions#new', :as => :signin
+
+  #post '/signin' => 'books#index', :as 'books'
 
 end
 

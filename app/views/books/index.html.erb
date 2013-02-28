@@ -27,6 +27,7 @@
       <%= link_to 'Show', book_path(book.isbn) %>
       <% if user_signed_in? %>
         <%= link_to "Check out", check_out_path(book.isbn) %></td>
+        <%= link_to "return", return_book_path(book.isbn) %></td>
       <% end %>
     </tr>
 <% end %>

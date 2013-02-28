@@ -12,7 +12,7 @@ class BooksController < ApplicationController
     @book.quantity_left = @book.quantity
     if @book.save
       flash[:success] = "The book was saved successfully"
-      redirect_to :action => "index"
+      redirect_to root_path
     else
       flash[:error] = "Please fill in the fields correctly"
       render :action => "new"
@@ -21,14 +21,15 @@ class BooksController < ApplicationController
 
   def show
     @book = Book.find_by_isbn(params[:isbn])
-    @book_history = []
     @users_borrowed = {}
-    Checkout.all.each do |check_outs|
-      @book_history << check_outs if check_outs.book_id == @book.id
-    end
+    @book_history = Checkout.where(book_id: @book.id)
 
-    @book_history.each do |book_history|
-      @users_borrowed[(User.find_by_id(book_history.user_id).name)] = book_history.check_out_date
+    checked_out(@book_history, @users_borrowed) unless @book_history.empty?
+  end
+
+  def checked_out(books, users)
+    books.each do |book|
+      users[(User.find_by_id(book.user_id).name)] = book.check_out_date
     end
   end
 
