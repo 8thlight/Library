@@ -23,8 +23,6 @@ class BooksController < ApplicationController
     @book = Book.find_by_isbn(params[:isbn])
     @book_history = []
     @users_borrowed = {}
-    @name = []
-    @date = []
     Checkout.all.each do |check_outs|
       @book_history << check_outs if check_outs.book_id == @book.id
     end

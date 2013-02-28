@@ -4,11 +4,18 @@ describe CheckoutsController do
   let (:check_out) {mock_model(Checkout).as_null_object}
   let (:book) {mock_model(Book).as_null_object}
 
-  before do
-    Checkout.stub(:new).and_return(check_out)
+  describe "verify unique checkout" do
+    it "validates that a user can only checkout one copy of a book" do
+      Checkout.create(book_id: 1, check_out_date: Time.now, user_id: 1)
+      checkout2 = Checkout.new(book_id: 1, check_out_date: Time.now, user_id: 1)
+      subject.unique?(checkout2).should be_false
+    end
   end
 
   describe "POST check_out" do
+    before do
+      Checkout.stub(:new).and_return(check_out)
+    end
     xit "redirects to the checkouts index" do
       post :create
       response.should redirect_to(:action => "index")
