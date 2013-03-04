@@ -9,7 +9,6 @@ class Book < ActiveRecord::Base
     :minimum => 10
   }
 
-  validate :quantity_left_less_than_quantity
   validate :validate_isbn
   validates :isbn, :uniqueness => true
   validates :quantity, :presence => true, :numericality => { :greater_than_or_equal_to => 0 }

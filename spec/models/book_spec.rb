@@ -12,10 +12,10 @@ RSpec.configure do |c|
 end
 
 RSpec.configure do |c|
-  c.exclusion_filter = { :network => false }
+  c.exclusion_filter = { :slow_tests => false }
 end
 
-describe Book do
+describe Book, :slow_tests => true do
 
   context "validations" do
     it "should reject duplicate ISBNs" do
@@ -54,12 +54,12 @@ describe Book do
     end
   end
 
-  describe "Google Book API" do
+  describe "Google Book API", :if => :network_available do
     {
       "9781934356548" => "Agile Web Development With Rails",
       "9781937557027" => "Mobile first"
     }.each do |isbn, title|
-      it "should retrieve the title #{title} passing the isbn #{isbn}", :network => false do
+      it "should retrieve the title #{title} passing the isbn #{isbn}" do
         book = Book.new(isbn: isbn, quantity: 1, quantity_left:1)
         book.get_title.should == title
       end
@@ -69,7 +69,7 @@ describe Book do
       "9781934356548" => "Sam Ruby, Dave Thomas, David Heinemeier Hansson, Leon Breedt",
       "9781937557027" => "Luke Wroblewski"
     }.each do |isbn, author|
-      it "should retrieve the author #{author} with the isbn #{isbn}", :network => false do
+      it "should retrieve the author #{author} with the isbn #{isbn}" do
         book = Book.new(isbn: isbn, quantity:1, quantity_left:1)
         book.get_author.should == author
       end
