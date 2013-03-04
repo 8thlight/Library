@@ -4,7 +4,7 @@ class CheckoutsController < ApplicationController
     @book = Book.find_by_isbn(params[:isbn])
     @book_id = @book.id if @book != nil
     @check_out = Checkout.new(book_id: @book_id, user_id: session[:user_id], check_out_date: Time.now)
-    if unique?(@check_out) && @check_out.save && @book.quantity_left > 0
+    if unique?(@check_out) && @book.quantity_left > 0 && @check_out.save
       decrement_quantity(@book)
       flash[:notice] = "the checkout was successful"
     else

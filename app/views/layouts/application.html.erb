@@ -18,6 +18,7 @@
           <li><%= link_to "Sign out", signout_path, :method => :delete %></li>
         <% else %>
         <li><%= link_to "sign in with Google", signin_path %></li>
+        <li><%= link_to "sign in with your 8th Light account", signin_openid_path %></li>
         <% end %>
       </ul>
     </div>

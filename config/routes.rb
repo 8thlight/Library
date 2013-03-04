@@ -26,6 +26,7 @@ Library::Application.routes.draw do
 
   match '/signout' => 'sessions#destroy', :as => :signout
   match '/signin' => 'sessions#new', :as => :signin
+  match '/signin/8thlight' => 'sessions#open_id', :as => :signin_openid
 
   #post '/signin' => 'books#index', :as 'books'
 

@@ -16,6 +16,10 @@ class SessionsController < ApplicationController
     redirect_to '/auth/google_oauth2'
   end
 
+  def open_id
+    redirect_to '/auth/admin'
+  end
+
   def failure
     redirect_to root_url, :alert => "Authentication error: #{params[:message].humanize}"
   end

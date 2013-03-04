@@ -33,6 +33,8 @@ end
 
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
+gem 'omniauth-openid'
+gem 'ruby-openid-apps-discovery'
 
 gem 'awesome_print'
 gem 'googlebooks'
