@@ -4,6 +4,10 @@ RSpec.configure do |c|
   c.exclusion_filter = { :slow_tests => false }
 end
 
+def create_check_out
+  post :create, {:isbn => "9781934356371"}
+end
+
 describe CheckoutsController, :slow_tests => true do
   let (:check_out) {mock_model(Checkout).as_null_object}
   let (:book) {mock_model(Book).as_null_object}
@@ -23,18 +27,18 @@ describe CheckoutsController, :slow_tests => true do
     end
 
     it "redirects to the checkouts index" do
-      post :create, {:isbn => "9781934356371"}
+      create_check_out
       response.should redirect_to(:action => "index")
     end
 
     it "saves the checkout" do
       check_out.should_receive(:save)
-      post :create, {:isbn => "9781934356371"}
+      create_check_out
     end
 
     context "when the checkout is saved successfully" do
       it "sets a flash[:notice] checkout" do
-        post :create, {:isbn => "9781934356371"}
+        create_check_out
         flash[:notice].should eq("the checkout was successful")
       end
     end
@@ -42,7 +46,7 @@ describe CheckoutsController, :slow_tests => true do
     context "when the checkout fails" do
       it "assigns @checkout" do
         check_out.stub(:save).and_return(false)
-        post :create, {:isbn => "9781934356371"}
+        create_check_out
         assigns[:check_out].should eq(check_out)
       end
     end

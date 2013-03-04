@@ -1,7 +1,8 @@
 class ReturnController < ApplicationController
   def create
     @book = Book.find_by_isbn(params[:isbn])
-    @checkout = Checkout.where(book_id: @book.id, user_id: session[:user_id])
+    @book_id = @book.id if @book != nil
+    @checkout = Checkout.where(book_id: @book_id, user_id: session[:user_id])
     if @checkout.any?
       Checkout.destroy(@checkout)
       increment_quantity(@book)
