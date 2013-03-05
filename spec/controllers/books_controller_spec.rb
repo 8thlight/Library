@@ -9,6 +9,31 @@ describe BooksController do
     end
   end
 
+  describe "GET show" do
+    let (:book) {mock_model(Book)}
+    let (:check_out) {mock_model(Checkout)}
+
+    before do
+      Book.stub(:find_by_isbn).and_return(book)
+      Checkout.stub(:where).and_return(check_out)
+      book.stub(:isbn).and_return("9781934356371")
+    end
+
+    it "finds all the checkouts with the id of the book" do
+      checked_out_books = Checkout.where(book_id: book.id)
+      checked_out_books.should eq(check_out)
+    end
+
+    it "retrieves the users name and check out date" do
+      checked_out_books = Checkout.where(book_id: book.id)
+      users = {}
+      checked_out_books.stub(:empty?).and_return(true)
+      book.stub(:user).stub(:name).and_return("Taka")
+      book.stub(:check_out_date).and_return(Time.now)
+      get :show, {:isbn => "9781934356371"}
+      users[book.user].should eq(book.check_out_date)
+    end
+  end
 
   describe "POST create" do
 

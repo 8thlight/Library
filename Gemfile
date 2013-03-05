@@ -39,6 +39,7 @@ gem 'ruby-openid-apps-discovery'
 gem 'awesome_print'
 gem 'googlebooks'
 gem 'jquery-rails'
+gem 'net-ping'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

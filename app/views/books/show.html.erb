@@ -9,8 +9,12 @@
 <p>Currently borrowing users</p>
 <ul>
   <% @users_borrowed.each do |user, date| %>
-    <%= user %><%= date %>
+    <li><%= user %> at <%= date %></li>
   <% end %>
+</ul>
+<p>Waiting list</p>
+<ul>
+  <li></li>
 </ul>
 <% if user_signed_in? %>
   <%= link_to "Check out", check_out_path(@book.isbn) %></td>
