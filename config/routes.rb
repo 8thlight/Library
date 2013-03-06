@@ -12,6 +12,8 @@ Library::Application.routes.draw do
 
   get '/books/:isbn' => 'books#show', as: 'book'
 
+  get '/mybooks' => 'books#mybooks', as: 'mybooks'
+
   get '/books/:isbn/edit' => 'books#edit', as: 'edit_book'
 
   put '/books/:isbn' => 'books#update'
