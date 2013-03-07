@@ -11,27 +11,15 @@ describe BooksController do
 
   describe "GET mybooks" do
     let (:checkout) {mock_model(Checkout)}
-    let (:book) {mock_model(Book)}
-    let (:user) {mock_model(User)}
-
-    before do
-      User.stub(:find_by_id).and_return(user)
-      Book.stub(:find_by_id).and_return(book)
-      Checkout.stub(:find_by_id).and_return(checkout)
-      user.stub(:id).and_return(1)
-      checkout.stub(:book_id).and_return(1)
-      book.stub(:id).and_return(1)
-    end
 
     it "returns a list of books" do
       get(:mybooks, {'user_id' => 1})
       assert_response :success
     end
 
-    xit "finds all the books the user has checked out" do
-      # needs fixing, not sure how to test this in a session
-      my_books = Checkout.where(user_id: user.id)
-      my_books.should eq(book)
+    it "finds all the books the user has checked out" do
+      Checkout.should_receive(:where).and_return(checkout)
+      subject.mybooks
     end
   end
 

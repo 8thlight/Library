@@ -20,16 +20,7 @@ class BooksController < ApplicationController
   end
 
   def mybooks
-    @book_ids = []
     @checkouts = Checkout.where(user_id:session[:user_id])
-    @checkouts.each do |checkout|
-      @book_ids << checkout.book_id
-    end
-    @book_titles = []
-    @book_ids.each do |book_id|
-      book = Book.find_by_id(book_id)
-      @book_titles << book.get_title
-    end
   end
 
   def show

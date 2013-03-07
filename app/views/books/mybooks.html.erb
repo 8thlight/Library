@@ -1,8 +1,6 @@
-<% if user_signed_in? %>
-  <h2>My books</h2>
-  <ul>
-    <% @book_titles.each do |title|%>
-      <li><%= title %> </li>
-    <% end %>
-  </ul>
-<% end %>
+<h2>My books</h2>
+<ul>
+  <% @checkouts.each do |checkout|%>
+    <li><%= checkout.book.get_title %> </li>
+  <% end %>
+</ul>
