@@ -16,7 +16,6 @@ class Book < ActiveRecord::Base
   validates :quantity, :presence => true, :numericality => { :greater_than_or_equal_to => 0 }
 
   API_KEY = "AIzaSyAqerTH3Ee8TcKFLn695LAu8HQm9SBFrn0"
-  QUARTER_BILLION = 2_500_000
 
   def get_attr(attr)
     if $redis.get("#{isbn}_#{attr}").nil?
@@ -50,7 +49,7 @@ class Book < ActiveRecord::Base
 
   def add_to_redis(title, attribute)
     $redis.set("#{isbn}_#{attribute}", title)
-    $redis.expire("#{isbn}_#{attribute}", QUARTER_BILLION)
+    $redis.expire("#{isbn}_#{attribute}", 1.month.seconds)
   end
 
   def google_book
