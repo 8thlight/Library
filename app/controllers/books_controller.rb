@@ -21,16 +21,8 @@ class BooksController < ApplicationController
 
   def show
     @book = Book.find_by_isbn(params[:isbn])
-    @users_borrowed = {}
     @checked_out_books = Checkout.where(book_id: @book.id)
-
-    checked_out(@checked_out_books, @users_borrowed) unless @checked_out_books.empty?
-  end
-
-  def checked_out(books, users)
-    books.each do |book|
-      users[book.user.name] = book.check_out_date
-    end
+    @waiting_list = Waitinglist.where(book_id: @book.id)
   end
 
   def edit

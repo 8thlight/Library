@@ -1,6 +1,8 @@
 class Book < ActiveRecord::Base
   has_many :check_outs
+  has_many :waitinglist
   has_many :users, :through => :checkouts
+  has_many :users, :through => :waitinglist
 
   attr_accessible :isbn, :quantity, :quantity_left
 

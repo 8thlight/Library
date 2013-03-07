@@ -33,6 +33,13 @@ RSpec.configure do |config|
   # config.mock_with :mocha
   # config.mock_with :flexmock
   # config.mock_with :rr
+  RSpec.configure do |c|
+    c.exclusion_filter = { :slow_tests => false }
+  end
+
+  def create(name)
+    post :create, {:isbn => "9781934356371"}
+  end
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
