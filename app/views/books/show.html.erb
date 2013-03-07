@@ -1,7 +1,7 @@
 <p>Image:</p>
-<img src="<%= @book.get_image %>">
-<p>Title: <%= @book.get_title %></p>
-<p>Author: <%= @book.get_author %></p>
+<img src="<%= @book.get_attr("image") %>">
+<p>Title: <%= @book.get_attr("title") %></p>
+<p>Author: <%= @book.get_attr("author") %></p>
 <p>isbn: <%= @book.isbn %></p>
 <p>quantity: <%= @book.quantity %></p>
 <p>Quantity Left: <%= @book.quantity_left %></p>

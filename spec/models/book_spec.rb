@@ -1,10 +1,6 @@
 require 'spec_helper'
 require 'net/ping'
 
-RSpec.configure do |c|
-  c.exclusion_filter = { :slow_tests => false }
-end
-
 def new_book(isbn, quantity)
   Book.new(isbn: isbn, quantity: quantity)
 end
@@ -50,7 +46,7 @@ describe Book, :slow_tests => false do
     }.each do |isbn, title|
       it "should retrieve the title #{title} passing the isbn #{isbn}" do
         book = new_book(isbn, 1)
-        book.get_title.should == title
+        book.get_attr("title").should == title
       end
     end
 
@@ -60,7 +56,7 @@ describe Book, :slow_tests => false do
     }.each do |isbn, author|
       it "should retrieve the author #{author} with the isbn #{isbn}" do
         book = new_book(isbn, 1)
-        book.get_author.should == author
+        book.get_attr("author").should == author
       end
     end
   end

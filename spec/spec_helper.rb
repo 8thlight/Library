@@ -34,7 +34,7 @@ RSpec.configure do |config|
   # config.mock_with :flexmock
   # config.mock_with :rr
   RSpec.configure do |c|
-    c.exclusion_filter = { :slow_tests => false }
+    c.exclusion_filter = { :slow_tests => true }
   end
 
   def create(name)

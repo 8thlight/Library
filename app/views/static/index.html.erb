@@ -23,9 +23,9 @@
     <tbody>
   <% @books.each do |book| %>
       <tr>
-        <td><img src="<%= book.get_image %>"></td>
-        <td><%= link_to book.get_title, book_path(book.isbn) %></td>
-        <td><%= book.get_author %></td>
+        <td><img src="<%= book.get_attr("image") %>"></td>
+        <td><%= link_to book.get_attr("title"), book_path(book.isbn) %></td>
+        <td><%= book.get_attr("author") %></td>
         <td><%= book.isbn %></td>
         <td><%= book.quantity %></td>
         <td><%= book.quantity_left %></td>
