@@ -16,7 +16,7 @@ class Book < ActiveRecord::Base
   validates :quantity, :presence => true, :numericality => { :greater_than_or_equal_to => 0 }
 
   API_KEY = "AIzaSyAqerTH3Ee8TcKFLn695LAu8HQm9SBFrn0"
-  QUARTER_BILLION = 2500000
+  QUARTER_BILLION = 2_500_000
 
   def get_attr(attr)
     if $redis.get("#{isbn}_#{attr}").nil?
