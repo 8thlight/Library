@@ -6,7 +6,7 @@ Library::Application.configure do
   # since you don't have to restart the web server when you make code changes.
   config.cache_classes = false
 
-  ENV["REDISTOGO_URL"] = "redis://redistogo:39057324e9b654db07eef93a87ebc194@dory.redistogo.com:10523/"
+  ENV["REDISTOGO_URL"] = 'redis://redistogo:39057324e9b654db07eef93a87ebc194@dory.redistogo.com:10523'
 
   # Log error messages when you accidentally call methods on nil.
   config.whiny_nils = true
