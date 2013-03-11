@@ -1,6 +1,9 @@
 class User < ActiveRecord::Base
   has_many :checkouts
+  has_many :waitinglist
   has_many :books, :through => :checkouts
+  has_many :books, :through => :waitinglist
+
   attr_accessible :email, :name
 
   def self.create_with_omniauth(auth)

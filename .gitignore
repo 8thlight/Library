@@ -6,7 +6,8 @@
 
 # Ignore bundler config
 /.bundle
-config/initializers/omniauth.rb
+/config/initializers/omniauth.rb
+/config/initializers/redis.rb
 
 # Ignore the default SQLite database.
 /db/*.sqlite3

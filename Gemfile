@@ -41,6 +41,8 @@ gem 'googlebooks'
 gem 'jquery-rails'
 gem 'net-ping'
 
+gem 'redis'
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

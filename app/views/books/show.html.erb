@@ -1,21 +1,25 @@
 <p>Image:</p>
-<img src="<%= @book.get_image %>">
-<p>Title: <%= @book.get_title %></p>
-<p>Author: <%= @book.get_author %></p>
+<img src="<%= @book.get_attr("image") %>">
+<p>Title: <%= @book.get_attr("title") %></p>
+<p>Author: <%= @book.get_attr("author") %></p>
 <p>isbn: <%= @book.isbn %></p>
 <p>quantity: <%= @book.quantity %></p>
 <p>Quantity Left: <%= @book.quantity_left %></p>
 
+<% if user_signed_in? %>
 <p>Currently borrowing users</p>
 <ul>
-  <% @users_borrowed.each do |user, date| %>
-    <li><%= user %> at <%= date %></li>
+  <% @checked_out_books.each do |book| %>
+    <li><%= book.user.name %> at <%= book.check_out_date %></li>
   <% end %>
 </ul>
 <p>Waiting list</p>
 <ul>
-  <li></li>
+  <% @waiting_list.each do |list| %>
+    <li><%= list.user.name %></li>
+  <% end %>
 </ul>
-<% if user_signed_in? %>
-  <%= link_to "Check out", check_out_path(@book.isbn) %></td>
+
+<%= link_to "Check out", check_out_path(@book.isbn) %></br>
+<%= link_to "add myself to the waiting list", wait_list_path(@book.isbn) %>
 <% end %>
