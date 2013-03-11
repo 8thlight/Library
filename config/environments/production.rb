@@ -3,9 +3,9 @@ Library::Application.configure do
 
   # Code is not reloaded between requests
   config.cache_classes = true
-  config.gem 'redis'
 
-  ENV["REDISTOGO_URL"] = 'redis://redistogo:39057324e9b654db07eef93a87ebc194@dory.redistogo.com:10523'
+  config.gem 'redis'
+  ENV['REDISTOGO_URL'] = 'redis://redistogo:39057324e9b654db07eef93a87ebc194@dory.redistogo.com:10523'
 
   # Full error reports are disabled and caching is turned on
   config.consider_all_requests_local       = false
