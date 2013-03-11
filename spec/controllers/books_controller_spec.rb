@@ -9,6 +9,20 @@ describe BooksController do
     end
   end
 
+  describe "GET mybooks" do
+    let (:checkout) {mock_model(Checkout)}
+
+    it "returns a list of books" do
+      get(:mybooks, {'user_id' => 1})
+      assert_response :success
+    end
+
+    it "finds all the books the user has checked out" do
+      Checkout.should_receive(:where).and_return(checkout)
+      subject.mybooks
+    end
+  end
+
   describe "GET show" do
     let (:book) {mock_model(Book)}
     let (:check_out) {mock_model(Checkout)}
@@ -100,26 +114,3 @@ describe BooksController do
     end
   end
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

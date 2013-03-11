@@ -14,8 +14,9 @@
         <li><%= link_to "Home", root_path %></li>
         <li><%= link_to "Add Book", new_book_path  %></li>
         <% if user_signed_in? %>
-          <li>Signed in as <%= current_user.email %>. Not you?</li>
-          <li><%= link_to "Sign out", signout_path, :method => :delete %></li>
+          <li><%= link_to "View Your Books", mybooks_path %></li>
+          <li>Signed in as <%= current_user.email %>. </li>
+          <li><%= link_to "Not you? Sign out", signout_path, :method => :delete %></li>
         <% else %>
         <li><%= link_to "sign in with Google", signin_path %></li>
         <li><%= link_to "sign in with your 8th Light account", signin_openid_path %></li>

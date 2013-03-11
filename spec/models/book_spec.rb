@@ -39,7 +39,7 @@ describe Book, :slow_tests => false do
     end
   end
 
-  describe "Google Book API", :if => :network_available do
+  describe "Google Book API" do
     {
       "9781934356548" => "Agile Web Development With Rails",
       "9781937557027" => "Mobile first"

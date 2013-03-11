@@ -19,6 +19,10 @@ class BooksController < ApplicationController
     end
   end
 
+  def mybooks
+    @checkouts = Checkout.where(user_id:session[:user_id])
+  end
+
   def show
     @book = Book.find_by_isbn(params[:isbn])
     @checked_out_books = Checkout.where(book_id: @book.id)
