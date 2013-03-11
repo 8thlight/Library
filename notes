@@ -1,5 +1,16 @@
 Google API lower request
 timestamp on checked out, has and belong to many relationship
 
+initializers/session_token.rb
+
+# Be sure to restart your server when you modify this file.
+
+Library::Application.config.session_store :cookie_store, key: '_Library_session'
+
+# Use the database for sessions instead of the cookie-based default,
+# which shouldn't be used to store highly confidential information
+# (create the session table with "rails generate session_migration")
+# Library::Application.config.session_store :active_record_store
+
 
 
