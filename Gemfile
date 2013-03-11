@@ -45,6 +45,7 @@ gem 'net-ping'
 
 gem 'redis'
 gem 'redis-store'
+gem 'redis-rails'
 
 gem 'faker'
 gem 'factory_girl'

@@ -50,7 +50,7 @@ class Book < ActiveRecord::Base
 
   def add_to_redis(title, attribute)
     $redis.set("#{isbn}_#{attribute}", title)
-    $redis.expire("#{isbn}_#{attribute}", QUARTER_BILLION)
+    $redis.expire("#{isbn}_#{attribute}", 2_500_000)
   end
 
   def google_book
