@@ -36,7 +36,7 @@ class Book < ActiveRecord::Base
   end
 
   def check_isbn
-    @google_book ||= GoogleBooks.search("isbn:#{isbn}", :api_key => API_KEY).first != nil
+    !google_book
   end
 
   def validate_isbn
