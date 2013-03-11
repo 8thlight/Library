@@ -15,7 +15,7 @@ describe CheckoutsController, :slow_tests => true do
 
   describe "verify unique checkout" do
     it "validates that a user can only checkout one copy of a book" do
-      Checkout.creat(book_id: 1, check_out_date: Time.now, user_id: 1)
+      Checkout.create(book_id: 1, check_out_date: Time.now, user_id: 1)
       checkout2 = Checkout.new(book_id: 1, check_out_date: Time.now, user_id: 1)
       subject.unique?(checkout2).should be_false
     end
@@ -49,13 +49,6 @@ describe CheckoutsController, :slow_tests => true do
       User.stub(:find).and_return(user)
       Checkout.stub(:new).and_return(check_out)
       book = Book.create(isbn: "9781934356371", quantity: 2, quantity_left: 2)
-    end
-
-    describe "#race condition" do
-      it "should make 100 users checkout at the same book at the same time" do
-        check_out.should_receive(:save)
-        hundred_users_checkout
-      end
     end
 
     it "redirects to the checkouts index" do
