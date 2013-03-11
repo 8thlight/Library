@@ -30,7 +30,8 @@ Library::Application.routes.draw do
   match '/signin' => 'sessions#new', :as => :signin
   match '/signin/8thlight' => 'sessions#open_id', :as => :signin_openid
 
-  #post '/signin' => 'books#index', :as 'books'
+  get 'book/:isbn/waiting_list' => 'waitinglists#create', as: 'wait_list'
+  post '/waitinglist' => 'waitinglists#create'
 
 end
 

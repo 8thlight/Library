@@ -128,6 +128,7 @@ GEM
     rake (10.0.3)
     rdoc (3.12)
       json (~> 1.4)
+    redis (3.0.3)
     ref (1.0.2)
     rspec-core (2.12.2)
     rspec-expectations (2.12.1)
@@ -192,6 +193,7 @@ DEPENDENCIES
   omniauth-openid
   pry
   rails (= 3.2.11)
+  redis
   rspec-rails
   ruby-openid-apps-discovery
   sass-rails (~> 3.2.3)
