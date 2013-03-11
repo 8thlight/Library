@@ -4,11 +4,11 @@ class CheckoutsController < ApplicationController
     @book = Book.find_by_isbn(params[:isbn])
     @book_id = @book.id if @book != nil
     @check_out = Checkout.new(book_id: @book_id, user_id: session[:user_id], check_out_date: Time.now)
-    @user_name =  User.find(session[:user_id]).name
+    @user_id =  User.find(session[:user_id]).id
 
     mutex = Mutex.new
 
-    if unique?(@check_out) && !@book.quantity_left.zero? && check_waitlist(@book_id, @user_name)
+    if unique?(@check_out) && !@book.quantity_left.zero? && check_waitlist(@book_id, @user_id)
       @check_out.save
       mutex.synchronize do
         decrement_quantity(@book)
@@ -52,9 +52,9 @@ class CheckoutsController < ApplicationController
     end
   end
 
-  def check_first_waitlist(book_id, user_name)
+  def check_first_waitlist(book_id, user_id)
     @waiting_list = Waitinglist.where(book_id: book_id).first
-    return true if @waiting_list != nil && @waiting_list.user.name == user_name
+    return true if @waiting_list != nil && @waiting_list.user.id == user_id
     false
   end
 end

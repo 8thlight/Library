@@ -1,6 +1,6 @@
 <h2>My books</h2>
 <ul>
   <% @checkouts.each do |checkout|%>
-    <li><%= checkout.book.get_title %> </li>
+    <li><%= checkout.book.get_attr("title") %> </li>
   <% end %>
 </ul>
