@@ -43,8 +43,10 @@ gem 'googlebooks'
 gem 'jquery-rails'
 gem 'net-ping'
 
-gem 'faker'
 gem 'redis'
+gem 'redis-store'
+
+gem 'faker'
 gem 'factory_girl'
 gem 'threach'
 
