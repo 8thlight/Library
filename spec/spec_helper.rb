@@ -25,14 +25,6 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
 RSpec.configure do |config|
 
-  RSpec.configure do |c|
-    c.exclusion_filter = { :slow_tests => false }
-  end
-
-  #RSpec.configure do |factory|
-  #  factory.include FactoryGirl::Syntax::Methods
-  #end
-
   def create(name)
     post :create, {:isbn => "9781934356371"}
   end

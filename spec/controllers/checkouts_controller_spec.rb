@@ -7,6 +7,10 @@ def hundred_users_checkout
   #threads.each(&:join)
 end
 
+RSpec.configure do |c|
+  c.exclusion_filter = {:slow_tests => true}
+end
+
 describe CheckoutsController, :slow_tests => true do
   let (:check_out) {mock_model(Checkout).as_null_object}
   let (:book) {mock_model(Book).as_null_object}
