@@ -12,6 +12,8 @@ group :test, :development do
   gem "simplecov"
   gem "simplecov-rcov"
   gem 'pry'
+  gem 'cucumber-rails', :require => false
+  gem 'database_cleaner'
 end
 
 group :production do
@@ -40,6 +42,11 @@ gem 'awesome_print'
 gem 'googlebooks'
 gem 'jquery-rails'
 gem 'net-ping'
+
+gem 'faker'
+gem 'redis'
+gem 'factory_girl'
+gem 'threach'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
