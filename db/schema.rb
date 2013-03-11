@@ -13,15 +13,9 @@
 
 ActiveRecord::Schema.define(:version => 20130305170116) do
 
-  create_table "authorizations", :force => true do |t|
-    t.string   "provider"
-    t.string   "uid"
-    t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "books", :force => true do |t|
+    t.string   "title"
+    t.string   "author"
     t.string   "isbn"
     t.integer  "quantity"
     t.datetime "created_at",    :null => false
@@ -29,13 +23,13 @@ ActiveRecord::Schema.define(:version => 20130305170116) do
     t.integer  "quantity_left"
   end
 
-  create_table "check_outs", :force => true do |t|
-    t.integer  "book_id"
-    t.integer  "user_id"
-    t.datetime "check_out_date"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+  create_table "books_users", :id => false, :force => true do |t|
+    t.integer "book_id"
+    t.integer "user_id"
   end
+
+  add_index "books_users", ["book_id", "user_id"], :name => "index_books_users_on_book_id_and_user_id"
+  add_index "books_users", ["user_id", "book_id"], :name => "index_books_users_on_user_id_and_book_id"
 
   create_table "checkouts", :force => true do |t|
     t.integer  "book_id"

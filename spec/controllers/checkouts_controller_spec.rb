@@ -1,12 +1,23 @@
 require 'spec_helper'
 
+def hundred_users_checkout
+  User.create(email: "tak.yuki@gmail.com", name: "Taka")
+  Checkout.create(user_id: 1, book_id: 1, check_out_date: Time.now)
+  require 'pry'
+  binding.pry
+  #threads = Array.new(5) {Thread.new  {post :create, {:isbn => "9781934356371"}}}
+  #threads.each(&:join)
+end
+
 describe CheckoutsController, :slow_tests => true do
   let (:check_out) {mock_model(Checkout).as_null_object}
   let (:book) {mock_model(Book).as_null_object}
+  let (:user) {mock_model(User).as_null_object}
+
 
   describe "verify unique checkout" do
     it "validates that a user can only checkout one copy of a book" do
-      Checkout.create(book_id: 1, check_out_date: Time.now, user_id: 1)
+      Checkout.creat(book_id: 1, check_out_date: Time.now, user_id: 1)
       checkout2 = Checkout.new(book_id: 1, check_out_date: Time.now, user_id: 1)
       subject.unique?(checkout2).should be_false
     end
@@ -40,6 +51,13 @@ describe CheckoutsController, :slow_tests => true do
       User.stub(:find).and_return(user)
       Checkout.stub(:new).and_return(check_out)
       book = Book.create(isbn: "9781934356371", quantity: 2, quantity_left: 2)
+    end
+
+    describe "#race condition" do
+      it "should make 100 users checkout at the same book at the same time" do
+        check_out.should_receive(:save)
+        hundred_users_checkout
+      end
     end
 
     it "redirects to the checkouts index" do

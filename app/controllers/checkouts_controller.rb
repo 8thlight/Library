@@ -5,12 +5,13 @@ class CheckoutsController < ApplicationController
     @book_id = @book.id if @book != nil
     @check_out = Checkout.new(book_id: @book_id, user_id: session[:user_id], check_out_date: Time.now)
     @user_name =  User.find(session[:user_id]).name
+
     if unique?(@check_out) && !@book.quantity_left.zero? && check_waitlist(@book_id, @user_name)
       @check_out.save
       decrement_quantity(@book)
       flash[:notice] = "the checkout was successful"
     else
-      flash[:notice] = "Sorry, #{@book.get_title} is unavailable. You may have already checkout this book."
+      flash[:notice] = "Sorry, book is unavailable. You may have already checkout this book."
     end
     redirect_to :action => "index"
   end
