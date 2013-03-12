@@ -6,7 +6,7 @@ env:
   - DB=sqlite
 
 script:
-  - RAILS_ENV=test bundle exec rake --trace db:migrate spec --tag ~slow_tests
+  - RAILS_ENV=test bundle exec rake --trace db:migrate spec SPEC_OPTS="--tag ~slow_tests"
 
 services:
   - redis-server
