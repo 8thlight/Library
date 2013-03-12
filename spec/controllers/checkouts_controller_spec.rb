@@ -51,6 +51,15 @@ describe CheckoutsController, :slow_tests => true do
       book = Book.create(isbn: "9781934356371", quantity: 2, quantity_left: 2)
     end
 
+    [5, 10, 12, 15].each do |num|
+      context "#limit_checkouts(#{num})" do
+        it "should limit number of checkouts to #{num}" do
+          Checkout.stub(:count).and_return(4)
+          subject.too_many_checkouts?(num, user).should be_false
+        end
+      end
+    end
+
     it "redirects to the checkouts index" do
       create "check out"
       response.should redirect_to(:action => "index")
@@ -75,5 +84,6 @@ describe CheckoutsController, :slow_tests => true do
         assigns[:check_out].should eq(check_out)
       end
     end
+
   end
 end
