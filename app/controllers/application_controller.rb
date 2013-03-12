@@ -13,12 +13,8 @@ class ApplicationController < ActionController::Base
     book.update_attributes(params[:book])
   end
 
-  def unique?(checkout)
-    unique = true
-    Checkout.all.each do |checkouts|
-      unique = checkout.user_id == checkouts.user_id && checkout.book_id == checkouts.book_id ? false : true
-    end
-    unique
+  def unique? checkout
+    !Checkout.all.all? { |checkouts| checkout.user_id == checkouts.user_id && checkout.book_id == checkouts.book_id }
   end
 
   def user_new_in_list?(user, book)
