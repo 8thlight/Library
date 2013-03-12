@@ -3,6 +3,10 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user, :user_signed_in?, :correct_user?
 
+  def too_many_checkouts?(num, user_id)
+    Checkout.where(user_id: user_id).count >= num
+  end
+
   private
 
     def current_user
