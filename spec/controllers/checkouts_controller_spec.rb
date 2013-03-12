@@ -7,9 +7,9 @@ def hundred_users_checkout
   #threads.each(&:join)
 end
 
-RSpec.configure do |c|
-  c.exclusion_filter = {:slow_tests => true}
-end
+#RSpec.configure do |c|
+#  c.exclusion_filter = {:slow_tests => true}
+#end
 
 describe CheckoutsController, :slow_tests => true do
   let (:check_out) {mock_model(Checkout).as_null_object}
@@ -17,7 +17,7 @@ describe CheckoutsController, :slow_tests => true do
   let (:user) {mock_model(User).as_null_object}
 
 
-  describe "verify unique checkout" do
+  describe "#unique?" do
     it "validates that a user can only checkout one copy of a book" do
       Checkout.create(book_id: 1, check_out_date: Time.now, user_id: 1)
       checkout2 = Checkout.new(book_id: 1, check_out_date: Time.now, user_id: 1)

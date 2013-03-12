@@ -1,2 +1,2 @@
 --color
---tag ~slow_tests
+-t ~slow_tests
