@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   end
 
   def unique? checkout
-    !Checkout.all.all? { |checkouts| checkout.user_id == checkouts.user_id && checkout.book_id == checkouts.book_id }
+    Checkout.all.all? { |checkouts| checkout.user_id != checkouts.user_id && checkout.book_id != checkouts.book_id }
   end
 
   def user_new_in_list?(user, book)
