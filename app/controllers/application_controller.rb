@@ -3,11 +3,6 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user, :user_signed_in?, :correct_user?
 
-  def user_new_in_list?(user, book)
-    Waitinglist.where(user_id: session[:user_id], book_id: book).empty? &&
-    Checkout.where(user_id: session[:user_id], book_id: book).empty?
-  end
-
   def increment_quantity(book)
     book.quantity_left += 1
     book.update_attributes(params[:book])
@@ -24,6 +19,11 @@ class ApplicationController < ActionController::Base
       unique = checkout.user_id == checkouts.user_id && checkout.book_id == checkouts.book_id ? false : true
     end
     unique
+  end
+
+  def user_new_in_list?(user, book)
+    Waitinglist.where(user_id: session[:user_id], book_id: book).empty? &&
+    Checkout.where(user_id: session[:user_id], book_id: book).empty?
   end
 
   def remove_from_waitinglist(book_id)
