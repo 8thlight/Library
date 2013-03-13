@@ -1,6 +1,5 @@
 if ENV['COVERAGE_REPORT']
   require 'simplecov'
-  require 'webmock/rspec'
   require 'simplecov-rcov'
   SimpleCov.formatter = SimpleCov::Formatter::RcovFormatter
   SimpleCov.coverage_dir 'reports'
@@ -25,13 +24,7 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
 RSpec.configure do |config|
 
-  RSpec.configure do |c|
-    c.exclusion_filter = { :slow_tests => false }
-  end
-
-  #RSpec.configure do |factory|
-  #  factory.include FactoryGirl::Syntax::Methods
-  #end
+  config.exclusion_filter = { :slow_tests => false }
 
   def create(name)
     post :create, {:isbn => "9781934356371"}

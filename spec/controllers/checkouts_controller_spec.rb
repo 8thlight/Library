@@ -13,7 +13,7 @@ describe CheckoutsController, :slow_tests => true do
   let (:user) {mock_model(User).as_null_object}
 
 
-  describe "verify unique checkout" do
+  describe "#unique?" do
     it "validates that a user can only checkout one copy of a book" do
       Checkout.create(book_id: 1, check_out_date: Time.now, user_id: 1)
       checkout2 = Checkout.new(book_id: 1, check_out_date: Time.now, user_id: 1)
@@ -49,6 +49,7 @@ describe CheckoutsController, :slow_tests => true do
       User.stub(:find).and_return(user)
       Checkout.stub(:new).and_return(check_out)
       book = Book.create(isbn: "9781934356371", quantity: 2, quantity_left: 2)
+      Book.stub(:find_by_isbn).and_return(book)
     end
 
     [5, 10, 12, 15].each do |num|

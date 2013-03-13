@@ -5,7 +5,8 @@ describe WaitinglistsController do
 
   before(:each) do
     Waitinglist.stub(:new).and_return(waiting_list)
-    Book.create(isbn: "9781934356371", quantity: 2, quantity_left: 0)
+    book = Book.create(isbn: "9781934356371", quantity: 2, quantity_left: 0)
+    Book.stub(:find_by_isbn).and_return(book)
   end
 
   describe "POST create" do
