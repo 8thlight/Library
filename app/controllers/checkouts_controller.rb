@@ -15,7 +15,7 @@ class CheckoutsController < ApplicationController
       end
       flash[:notice] = "the checkout was successful"
     else
-      flash[:notice] = "Sorry, book is unavailable. You may have already checkout this book."
+      flash[:notice] = "Sorry, that book is unavailable. You may have already checked out this book."
     end
     redirect_to :action => "index"
 
