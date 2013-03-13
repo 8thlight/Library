@@ -21,6 +21,7 @@ class SessionsController < ApplicationController
   end
 
   def failure
-    redirect_to root_url, :alert => "Authentication error: #{params[:message].humanize}"
+    redirect_to root_url
+    flash[:notice] = "Authentication error"
   end
 end
