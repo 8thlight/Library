@@ -34,12 +34,6 @@ describe CheckoutsController, :slow_tests => true do
       subject.check_waitlist(1,2).should be_true
     end
 
-#    it "returns false if waiting is not empty and does not match the first one on the list" do
-#      Waitinglist.stub(:empty?).and_return(false)
-#      subject.stub(:check_first_waitlist).and_return(false)
-#      subject.check_waitlist(waiting,2).should be_false
-#    end
-
     context "#check_first_waitlist" do
       it "returns false if waitlist is not empty and user is not first in line" do
         Waitinglist.create(book_id: 1, user_id:1, wait_since: Time.now)
