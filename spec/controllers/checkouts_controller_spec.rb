@@ -49,6 +49,7 @@ describe CheckoutsController, :slow_tests => true do
       User.stub(:find).and_return(user)
       Checkout.stub(:new).and_return(check_out)
       book = Book.create(isbn: "9781934356371", quantity: 2, quantity_left: 2)
+      Book.stub(:find_by_isbn).and_return(book)
     end
 
     it "redirects to the checkouts index" do
