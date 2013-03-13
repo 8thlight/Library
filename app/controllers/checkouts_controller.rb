@@ -6,10 +6,12 @@ class CheckoutsController < ApplicationController
     @check_out = Checkout.new(book_id: @book_id, user_id: session[:user_id], check_out_date: Time.now)
     @user_id =  User.find(session[:user_id]).id
 
-    if unique?(@check_out) && !@book.quantity_left.zero? && check_waitlist(@book_id, @user_id) && !too_many_checkouts?(5, @user_id)
-      @check_out.save
-      decrement_quantity(@book)
-      flash[:notice] = "the checkout was successful"
+    if unique?(@check_out) && !@book.quantity_left.zero?
+      if check_waitlist(@book_id, @user_id) && !too_many_checkouts?(5, @user_id)
+        @check_out.save
+        decrement_quantity(@book)
+        flash[:notice] = "the checkout was successful"
+      end
     else
       flash[:notice] = "Sorry, book is unavailable."
     end
