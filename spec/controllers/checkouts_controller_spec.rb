@@ -11,6 +11,7 @@ describe CheckoutsController, :slow_tests => true do
   let (:check_out) {mock_model(Checkout).as_null_object}
   let (:book) {mock_model(Book).as_null_object}
   let (:user) {mock_model(User).as_null_object}
+  let (:waiting) {Waitinglist.new(book_id:1, user_id:2, wait_since: Time.now)}
 
 
   describe "verify unique checkout" do
@@ -24,14 +25,26 @@ describe CheckoutsController, :slow_tests => true do
   describe "#check_waitlist" do
 
     it "returns true if waitlist is empty" do
-      waiting = Waitinglist.new(book_id: 1, user_id:2, wait_since: Time.now)
-      subject.check_waitlist(waiting, 2).should be_true
+      subject.check_waitlist(1, 2).should be_true
     end
 
-    it "returns false if waitlist is not empty and user is not first in line" do
-      Waitinglist.create(book_id: 1, user_id:1, wait_since: Time.now)
-      waiting = Waitinglist.new(book_id: 1, user_id:2, wait_since: Time.now)
-      subject.check_first_waitlist(waiting, 2).should be_false
+    it "returns true if waiting is not empty but matches the first one on the list" do
+      Waitinglist.stub(:empty?).and_return(false)
+      subject.stub(:check_first_waitlist).and_return(true)
+      subject.check_waitlist(1,2).should be_true
+    end
+
+#    it "returns false if waiting is not empty and does not match the first one on the list" do
+#      Waitinglist.stub(:empty?).and_return(false)
+#      subject.stub(:check_first_waitlist).and_return(false)
+#      subject.check_waitlist(waiting,2).should be_false
+#    end
+
+    context "#check_first_waitlist" do
+      it "returns false if waitlist is not empty and user is not first in line" do
+        Waitinglist.create(book_id: 1, user_id:1, wait_since: Time.now)
+        subject.check_first_waitlist(waiting, 2).should be_false
+      end
     end
   end
 
@@ -43,7 +56,6 @@ describe CheckoutsController, :slow_tests => true do
   end
 
   describe "POST create" do
-    let (:user) {mock_model(User)}
 
     before do
       User.stub(:find).and_return(user)
@@ -66,6 +78,14 @@ describe CheckoutsController, :slow_tests => true do
         create "check out"
         flash[:notice].should eq("the checkout was successful")
       end
+    end
+
+    context "when the checkout is not saved" do
+       it "sets a flash[:notice] checkout" do
+         subject.stub(:unique?).and_return(false)
+         create "check out"
+         flash[:notice].should eq("Sorry, book is unavailable")
+       end
     end
 
     context "when the checkout fails" do

@@ -5,7 +5,7 @@ describe WaitinglistsController do
 
   before(:each) do
     Waitinglist.stub(:new).and_return(waiting_list)
-    Book.create(isbn: "9781934356371", quantity: 2, quantity_left: 0)
+    book = Book.create(isbn: "9781934356371", quantity: 2, quantity_left: 0)
   end
 
   describe "POST create" do
@@ -25,6 +25,14 @@ describe WaitinglistsController do
         create "waiting list"
         flash[:notice].should eq("Added to the waiting list")
       end
+    end
+
+    context "when the user is not added to the waiting list" do
+       it "sets a flash[:notice]" do
+         subject.stub(:user_new_in_list?).and_return(false)
+         create "waiting list"
+         flash[:notice].should eq("Sorry, you can not be added to the waiting list")
+       end
     end
   end
 end

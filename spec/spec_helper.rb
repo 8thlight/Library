@@ -1,6 +1,5 @@
 if ENV['COVERAGE_REPORT']
   require 'simplecov'
-  require 'webmock/rspec'
   require 'simplecov-rcov'
   SimpleCov.formatter = SimpleCov::Formatter::RcovFormatter
   SimpleCov.coverage_dir 'reports'
