@@ -14,6 +14,6 @@ class WaitinglistsController < ApplicationController
 
   def user_new_in_list?(user, book)
     Waitinglist.where(user_id: session[:user_id], book_id: book).empty? &&
-      Checkout.where(user_id: session[:user_id], book_id: book).empty?
+    Checkout.where(user_id: session[:user_id], book_id: book).empty?
   end
 end

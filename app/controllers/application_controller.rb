@@ -3,6 +3,16 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user, :user_signed_in?, :correct_user?
 
+  def increment_quantity(book)
+    book.quantity_left += 1
+    book.update_attributes(params[:book])
+  end
+
+  def decrement_quantity(book)
+    book.quantity_left -= 1
+    book.update_attributes(params[:book])
+  end
+
   private
 
     def current_user

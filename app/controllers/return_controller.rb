@@ -13,8 +13,4 @@ class ReturnController < ApplicationController
     redirect_to root_path
   end
 
-  def increment_quantity(book)
-    book.quantity_left += 1
-    book.update_attributes(params[:book])
-  end
 end

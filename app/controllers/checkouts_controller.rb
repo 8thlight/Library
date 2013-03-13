@@ -6,37 +6,18 @@ class CheckoutsController < ApplicationController
     @check_out = Checkout.new(book_id: @book_id, user_id: session[:user_id], check_out_date: Time.now)
     @user_id =  User.find(session[:user_id]).id
 
-    mutex = Mutex.new
-
     if unique?(@check_out) && !@book.quantity_left.zero? && check_waitlist(@book_id, @user_id)
       @check_out.save
-      mutex.synchronize do
-        decrement_quantity(@book)
-      end
+      decrement_quantity(@book)
       flash[:notice] = "the checkout was successful"
     else
       flash[:notice] = "Sorry, that book is unavailable. You may have already checked out this book."
     end
     redirect_to :action => "index"
-
   end
 
-  def decrement_quantity(book)
-    book.quantity_left -= 1
-    book.update_attributes(params[:book])
-  end
-
-  def unique?(checkout)
-    unique = true
-    Checkout.all.each do |checkouts|
-      unique = checkout.user_id == checkouts.user_id && checkout.book_id == checkouts.book_id ? false : true
-    end
-    unique
-  end
-
-  def remove_from_waitinglist(book_id)
-    remove_from_waiting_list = Waitinglist.where(book_id: book_id).first
-    Waitinglist.destroy(remove_from_waiting_list)
+  def unique? checkout
+    Checkout.all.all? { |checkouts| checkout.user_id != checkouts.user_id && checkout.book_id != checkouts.book_id }
   end
 
   def check_waitlist(book_id, user_name)
@@ -50,6 +31,11 @@ class CheckoutsController < ApplicationController
         return false
       end
     end
+  end
+
+  def remove_from_waitinglist(book_id)
+    remove_from_waiting_list = Waitinglist.where(book_id: book_id).first
+    Waitinglist.destroy(remove_from_waiting_list)
   end
 
   def check_first_waitlist(book_id, user_id)
