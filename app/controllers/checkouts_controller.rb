@@ -15,6 +15,11 @@ class CheckoutsController < ApplicationController
     end
     redirect_to :action => "index"
   end
+
+  def unique? checkout
+    Checkout.all.all? { |checkouts| checkout.user_id != checkouts.user_id && checkout.book_id != checkouts.book_id }
+  end
+
 end
 
 
