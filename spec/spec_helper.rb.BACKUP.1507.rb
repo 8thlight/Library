@@ -26,8 +26,12 @@ RSpec.configure do |config|
 
 <<<<<<< HEAD
   config.exclusion_filter = { :slow_tests => false }
-=======
 
+  #RSpec.configure do |factory|
+  #  factory.include FactoryGirl::Syntax::Methods
+  #end
+
+=======
 >>>>>>> eee98b2dfb89ab309e21eef85058b0172432e264
   def create(name)
     post :create, {:isbn => "9781934356371"}

@@ -1,1 +1,2 @@
 --color
+-t ~slow_tests
