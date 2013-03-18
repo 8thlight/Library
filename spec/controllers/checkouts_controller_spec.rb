@@ -88,7 +88,7 @@ describe CheckoutsController, :slow_tests => true do
        it "sets a flash[:notice] checkout" do
          subject.stub(:unique?).and_return(false)
          create "check out"
-         flash[:notice].should eq("Sorry, book is unavailable")
+         flash[:notice].should eq("Sorry, book is unavailable.")
        end
     end
 
