@@ -45,6 +45,7 @@ gem 'net-ping'
 
 gem 'redis'
 
+gem 'draper'
 gem 'faker'
 gem 'factory_girl'
 gem 'threach'
