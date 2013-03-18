@@ -44,6 +44,7 @@ gem 'jquery-rails'
 gem 'net-ping'
 
 gem 'redis'
+gem 'draper', '~> 1.0'
 
 gem 'faker'
 gem 'factory_girl'
