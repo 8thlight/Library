@@ -19,15 +19,15 @@ class Book < ActiveRecord::Base
   QUARTER_BILLION = 2_500_000
 
   uri = URI.parse(ENV["REDISTOGO_URL"] || "redis://localhost:6379/")
-  @redis = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
+  REDIS = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
 
   def get_attr(attr)
-    if $redis.get("#{isbn}_#{attr}").nil?
+    if REDIS.get("#{isbn}_#{attr}").nil?
       google_attribute = google_data(attr)
       add_to_redis(google_attribute, attr)
       return google_attribute
     else
-      $redis.get("#{isbn}_#{attr}")
+      REDIS.get("#{isbn}_#{attr}")
     end
   end
 
@@ -39,7 +39,7 @@ class Book < ActiveRecord::Base
   end
 
   def check_isbn
-    @google_book ||= GoogleBooks.search("isbn:#{isbn}", :api_key => API_KEY).first != nil
+    google_book != nil
   end
 
   def validate_isbn
@@ -52,8 +52,8 @@ class Book < ActiveRecord::Base
   private
 
   def add_to_redis(title, attribute)
-    $redis.set("#{isbn}_#{attribute}", title)
-    $redis.expire("#{isbn}_#{attribute}", 2_500_000)
+    REDIS.set("#{isbn}_#{attribute}", title)
+    REDIS.expire("#{isbn}_#{attribute}", 2_500_000)
   end
 
   def google_book
