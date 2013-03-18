@@ -7,7 +7,6 @@ class ApplicationController < ActionController::Base
     Checkout.where(user_id: user_id).count >= num
   end
 
-  private
 
     def current_user
       begin

@@ -13,11 +13,8 @@ class CheckoutsController < ApplicationController
         flash[:notice] = "the checkout was successful"
       end
     else
-<<<<<<< HEAD
       flash[:notice] = "Sorry, book is unavailable."
-=======
       flash[:notice] = "Sorry, book is unavailable"
->>>>>>> 8ll#37
     end
     redirect_to :action => "index"
   end

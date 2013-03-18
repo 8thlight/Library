@@ -5,7 +5,7 @@ describe WaitinglistsController do
 
   before(:each) do
     Waitinglist.stub(:new).and_return(waiting_list)
-    Book.create(isbn: "9781934356371", quantity: 2, quantity_left: 0)
+    book = Book.create(isbn: "9781934356371", quantity: 2, quantity_left: 0)
     Book.stub(:find_by_isbn).and_return(book)
   end
 
@@ -22,7 +22,6 @@ describe WaitinglistsController do
 
     context "when the user is added successfully to the wait list" do
       it "sets a flash[:notice]" do
-        book = mock_model(Book)
         create "waiting list"
         flash[:notice].should eq("Added to the waiting list")
       end

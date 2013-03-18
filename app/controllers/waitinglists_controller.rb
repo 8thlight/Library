@@ -3,6 +3,7 @@ class WaitinglistsController < ApplicationController
     @book = Book.find_by_isbn(params[:isbn])
     @book_id = @book.id if @book != nil
     @wait = Waitinglist.new(book_id: @book_id, user_id: session[:user_id], wait_since: Time.now)
+
     if @book.quantity_left == 0 && user_new_in_list?(session[:user_id], @book_id)
       @wait.save
       flash[:notice] = "Added to the waiting list"
