@@ -11,10 +11,11 @@ class CheckoutsController < ApplicationController
         @check_out.save
         decrement_quantity(@book)
         flash[:notice] = "the checkout was successful"
+      else
+        flash[:notice] = "too many checkouts"
       end
     else
       flash[:notice] = "Sorry, book is unavailable."
-      flash[:notice] = "Sorry, book is unavailable"
     end
     redirect_to :action => "index"
   end
