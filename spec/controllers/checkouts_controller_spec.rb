@@ -69,7 +69,7 @@ describe CheckoutsController, :slow_tests => true do
 
     it "redirects to the checkouts index" do
       create "check out"
-      response.should redirect_to(:action => "index")
+      response.should redirect_to root_url
     end
 
     it "saves the checkout" do

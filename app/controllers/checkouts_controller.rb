@@ -17,7 +17,7 @@ class CheckoutsController < ApplicationController
     else
       flash[:notice] = "Sorry, book is unavailable."
     end
-    redirect_to :action => "index"
+    redirect_to root_url
   end
 
   def decrement_quantity(book)

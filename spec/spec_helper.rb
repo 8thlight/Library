@@ -24,7 +24,6 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
 RSpec.configure do |config|
 
-  config.exclusion_filter = { :slow_tests => false }
 
   def create(name)
     post :create, {:isbn => "9781934356371"}
