@@ -7,6 +7,10 @@ class BooksController < ApplicationController
     @books = Book.all
   end
 
+  def preview
+    @book = Book.new(params[:book])
+  end
+
   def create
     @book = Book.new(params[:book])
     @book.quantity_left = @book.quantity

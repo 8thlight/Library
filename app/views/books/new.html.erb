@@ -1,5 +1,6 @@
   <h3>Register Book</h3>
-    <%= form_for @book do |f| %>
+
+  <%= form_for @book, :url => book_preview_path do |f| %>
 
       <%= render 'shared/error_messages' %>
 
@@ -7,6 +8,6 @@
 
       <div><%= f.number_field :quantity, placeholder: "Quantity", min: 0%></div>
 
-      <div><%= f.submit "Register Book", class: "btn btn-primary" %></div>
+      <div><%= f.submit "Preview Book", class: "btn btn-primary" %></div>
 
     <% end %>

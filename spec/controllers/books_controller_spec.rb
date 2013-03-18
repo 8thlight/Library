@@ -2,6 +2,13 @@ require 'spec_helper'
 
 describe BooksController do
 
+  describe "#book_preview" do
+    it "retrieves book from book/new" do
+      Book.should_receive(:new)
+      get 'preview'
+    end
+  end
+
   describe "GET 'new'" do
     it "returns http success" do
       get 'new'
