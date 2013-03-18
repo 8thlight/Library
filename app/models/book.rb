@@ -18,6 +18,9 @@ class Book < ActiveRecord::Base
   API_KEY = "AIzaSyAqerTH3Ee8TcKFLn695LAu8HQm9SBFrn0"
   QUARTER_BILLION = 2_500_000
 
+  uri = URI.parse(ENV["REDISTOGO_URL"] || "redis://localhost:6379/")
+  @redis = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
+
   def get_attr(attr)
     if $redis.get("#{isbn}_#{attr}").nil?
       google_attribute = google_data(attr)

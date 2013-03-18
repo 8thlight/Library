@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'net/ping'
 
 def new_book(isbn, quantity)
   Book.new(isbn: isbn, quantity: quantity)
@@ -48,6 +47,13 @@ describe Book do
         book = new_book(isbn, 1)
         book.get_attr("title").should == title
       end
+
+      context "#google_data" do
+        it "returns the google attribute" do
+          book = new_book(isbn,1)
+          book.google_data("title").should == title
+        end
+      end
     end
 
     {
@@ -57,6 +63,13 @@ describe Book do
       it "should retrieve the author #{author} with the isbn #{isbn}" do
         book = new_book(isbn, 1)
         book.get_attr("author").should == author
+      end
+
+      context "#google_data" do
+        it "returns the google attribute" do
+          book = new_book(isbn,1)
+          book.google_data("author").should == author
+        end
       end
     end
   end

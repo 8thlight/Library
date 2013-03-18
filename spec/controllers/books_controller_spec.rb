@@ -9,6 +9,28 @@ describe BooksController do
     end
   end
 
+  describe "GET 'edit'" do
+    it "should return book" do
+      Book.should_receive(:find_by_isbn).with("9781934356371")
+      get 'edit', {:isbn => "9781934356371"}
+    end
+  end
+
+  describe "PUT 'update'" do
+    it "find book by isbn" do
+      Book.should_receive(:find_by_isbn)
+      put 'update', {:isbn => "9781934356371"}
+    end
+
+    it "updates attribute of the book" do
+      book = mock_model(Book)
+      Book.stub(:find_by_isbn).with("9781934356371").and_return(book)
+      book.stub(:update_attributes).and_return(true)
+      put 'update', {:isbn => "9781934356371"}
+      response.should redirect_to :action => "show"
+    end
+  end
+
   describe "GET mybooks" do
     let (:checkout) {mock_model(Checkout)}
 

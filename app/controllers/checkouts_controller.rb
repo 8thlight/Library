@@ -13,7 +13,11 @@ class CheckoutsController < ApplicationController
         flash[:notice] = "the checkout was successful"
       end
     else
+<<<<<<< HEAD
       flash[:notice] = "Sorry, book is unavailable."
+=======
+      flash[:notice] = "Sorry, book is unavailable"
+>>>>>>> 8ll#37
     end
     redirect_to :action => "index"
   end
@@ -36,11 +40,11 @@ class CheckoutsController < ApplicationController
     Waitinglist.destroy(remove_from_waiting_list)
   end
 
-  def check_waitlist(book_id, user_name)
+  def check_waitlist(book_id, user_id)
     if Waitinglist.where(book_id: book_id).empty?
       return true
     else
-      if check_first_waitlist(book_id, user_name)
+      if check_first_waitlist(book_id, user_id)
         remove_from_waitinglist(book_id)
         return true
       else
