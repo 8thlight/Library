@@ -38,6 +38,7 @@
 *.sql
 *.sqlite
 
+.gitkeep
 .DS_Store
 .DS_Store?
 ._*
