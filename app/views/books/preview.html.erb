@@ -1,0 +1,24 @@
+<h3>Book Preview</h3>
+
+<%= render 'shared/error_messages' %>
+
+<% if @book.valid? %>
+  <img src="<%= @book.get_attr("image") %>">
+  <p>Title: <%= @book.get_attr("title") %></p>
+  <p>Author: <%= @book.get_attr("author") %></p>
+
+  <%= form_for @book, :url => book_create_path do |f| %>
+
+
+    <div><%= f.text_field :isbn, :value => @book.isbn %></div>
+
+    <div><%= f.number_field :quantity, :value => @book.quantity %></div>
+
+    <div><%= f.submit "Add Book", class: "btn btn-primary" %></div>
+
+  <% end %>
+<% end %>
+
+  <%= render 'shared/error_messages' %>
+
+<%= link_to "Try again", new_book_path %>
