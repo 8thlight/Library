@@ -2,9 +2,18 @@ class BooksController < ApplicationController
   def new
     @book = Book.new
   end
+
+<<<<<<< HEAD
+=======
+  def index
+    @books = Book.all
+  end
+
   def preview
     @book = Book.new(params[:book])
   end
+
+>>>>>>> 8ll#32_book_preview
   def create
     @book = Book.new(params[:book])
     @book.quantity_left = @book.quantity
@@ -33,8 +42,8 @@ class BooksController < ApplicationController
 
   def update
     @book = Book.find_by_isbn(params[:isbn])
-    @book.quantity_left += ((params[:book][:quantity].to_i) - @book.quantity)
-    @book.update_attributes(params[:book])
+    #@book.quantity_left += ((params[:book][:quantity].to_i) - @book.quantity)
+    #@book.update_attributes(params[:book])
       redirect_to :action => "show"
   end
 end

@@ -8,7 +8,11 @@ Library::Application.routes.draw do
   post '/return' => 'return#create'
 
   get '/books/new' => 'books#new', as: 'new_book'
-  post '/books' => 'books#create'
+
+  get '/books/preview' => 'books#preview', as: 'book_preview'
+  post '/books/preview' => 'books#preview'
+
+  post '/books' => 'books#create', as: 'book_create'
 
   get '/books/:isbn' => 'books#show', as: 'book'
 
