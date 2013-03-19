@@ -9,6 +9,8 @@ Library::Application.configure do
   config.gem 'redis'
   ENV["REDISTOGO_URL"] = 'redis://redistogo:39057324e9b654db07eef93a87ebc194@dory.redistogo.com:10523'
 
+  config.action_mailer.delivery_method = :smtp
+
   # Log error messages when you accidentally call methods on nil.
   config.whiny_nils = true
 
@@ -17,7 +19,7 @@ Library::Application.configure do
   config.action_controller.perform_caching = false
 
   # Don't care if the mailer can't send
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
 
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
