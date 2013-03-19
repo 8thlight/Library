@@ -47,6 +47,7 @@ class Book < ActiveRecord::Base
       errors.add(:isbn, 'does not exist')
       return false
     end
+    return true
   end
 
   private
