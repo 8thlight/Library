@@ -39,15 +39,16 @@ class Book < ActiveRecord::Base
   end
 
   def check_isbn
-    google_book != nil
+    GoogleBooks.search("isbn:#{isbn}", :api_key => API_KEY).first != nil
   end
 
   def validate_isbn
     if check_isbn != true
-      errors.add(:isbn, 'does not exist')
-      return false
+       errors.add(:isbn, 'does not exist')
+       return false
+    else
+      return true
     end
-    return true
   end
 
   private
