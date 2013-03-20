@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   helper_method :current_user, :user_signed_in?, :correct_user?,
-                :book_not_checked_out?
+                :book_not_checked_out?, :not_on_waiting_list?, :too_many_checkouts?
 
   def too_many_checkouts?(num, user_id)
     Checkout.where(user_id: user_id).count >= num
@@ -19,6 +19,7 @@ class ApplicationController < ActionController::Base
         puts "I am rescued"
     end
   end
+
   def not_on_waiting_list?(book)
     Waitinglist.where(user_id: current_user.id, book_id: book.id).empty?
   end
