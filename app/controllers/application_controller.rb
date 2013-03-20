@@ -7,7 +7,6 @@ class ApplicationController < ActionController::Base
     Checkout.where(user_id: user_id).count >= num
   end
 
-
     def current_user
       begin
         @current_user ||= User.find(session[:user_id]) if session[:user_id]

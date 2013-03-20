@@ -7,6 +7,7 @@ class ReturnController < ApplicationController
       Checkout.destroy(@checkout)
       increment_quantity(@book)
       flash[:notice] = "Succesfully returned book."
+      notify_if_waitlist(@book)
     else
       flash[:notice] = "Could not return book."
     end
@@ -16,5 +17,12 @@ class ReturnController < ApplicationController
   def increment_quantity(book)
     book.quantity_left += 1
     book.update_attributes(params[:book])
+  end
+
+  def notify_if_waitlist(book)
+    list = Waitinglist.where(book_id: book.id).first
+    if list
+      ReturnMailer.notify_book_available(list.user, book).deliver
+    end
   end
 end

@@ -1,9 +1,10 @@
 require 'spec_helper'
 
 describe ReturnController do
-
   describe "POST create" do
+
     let(:check_out) {mock_model(Checkout)}
+
     before do
       book = mock_model(Book)
       book.stub(:isbn).and_return("9781934356371")
@@ -23,7 +24,6 @@ describe ReturnController do
     end
 
     context "when there are checkouts" do
-
       it "#increment quantity" do
         book = Book.create(isbn: "9781934356371", quantity: 2, quantity_left: 2)
         subject.increment_quantity(book)
