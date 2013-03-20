@@ -11,6 +11,8 @@ class CheckoutsController < ApplicationController
         @check_out.save
         decrement_quantity(@book)
         flash[:notice] = "the checkout was successful"
+      elsif !check_waitlist(@book_id, @user_id)
+        flash[:notice] = "there are people waiting on the waitinglist."
       else
         flash[:notice] = "too many checkouts"
       end

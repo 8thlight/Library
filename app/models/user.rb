@@ -16,11 +16,4 @@ class User < ActiveRecord::Base
       end
     end
   end
-
-  FactoryGirl.define do
-    factory :user do
-      sequence(:name) {|n| "cool #{n}"}
-      sequence(:email) {|n| "person-#{n}@gmail.com"}
-    end
-  end
 end
