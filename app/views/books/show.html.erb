@@ -20,6 +20,11 @@
   <% end %>
 </ul>
 
-<%= link_to "Check out", check_out_path(@book.isbn) %></br>
-<%= link_to "add myself to the waiting list", wait_list_path(@book.isbn) %>
+  <% if user_signed_in? && book_not_checked_out?(@book) %>
+    <%= link_to "Check out", check_out_path(@book.isbn) %></br>
+  <% end %>
+
+  <% if not_on_waiting_list?(@book) %>
+    <%= link_to "add myself to the waiting list", wait_list_path(@book.isbn) %>
+  <% end %>
 <% end %>

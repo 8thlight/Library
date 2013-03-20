@@ -29,8 +29,13 @@
         <td><%= book.quantity_left %></td>
         <td><%= link_to 'Edit', edit_book_path(book.isbn) %>
         <%= link_to 'Show', book_path(book.isbn) %>
+        <% if user_signed_in? && book_not_checked_out?(book) %>
           <%= link_to "Check out", check_out_path(book.isbn) %>
+        <% end %>
+
+        <% if !book_not_checked_out?(book) %>
           <%= link_to "return", return_book_path(book.isbn) %></td>
+        <% end %>
       </tr>
   <% end %>
     </tbody>
