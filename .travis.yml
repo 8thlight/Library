@@ -7,6 +7,7 @@ env:
 
 script:
   - RAILS_ENV=test bundle exec rake --trace db:migrate spec
+  - RAILS_ENV=test bundle exec
 services:
   - redis-server
 
