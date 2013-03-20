@@ -2,11 +2,11 @@
 
 <%= form_for @book, :url => book_path(@book.isbn) do |f| %>
 
-      <img src="<%= @book.get_image %>">
+      <img src="<%= @book.get_attr("image") %>">
 
-      <div><%= @book.get_title %></div>
+      <div><%= @book.get_attr("title") %></div>
 
-      <div><%= @book.get_author %></div>
+      <div><%= @book.get_attr("author") %></div>
 
       <div><%= @book.isbn %></div>
 
