@@ -34,7 +34,7 @@ describe Book do
 
     it "should check ISBN does not exists" do
       new_book("9780321287654", 1)
-      subject.validate_isbn.should be_false
+      subject.should have(1).error_on(:isbn)
     end
   end
 
