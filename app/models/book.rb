@@ -1,9 +1,10 @@
 class Book < ActiveRecord::Base
-  include RedisDecorator
+  include ApplicationDecorator
   has_many :check_outs
   has_many :waitinglist
   has_many :users, :through => :checkouts
   has_many :users, :through => :waitinglist
+  after_initialize :api_book
 
   attr_accessible :isbn, :quantity, :quantity_left
 
@@ -15,5 +16,24 @@ class Book < ActiveRecord::Base
   validate :validate_isbn
   validates :isbn, :uniqueness => true
   validates :quantity, :presence => true, :numericality => { :greater_than_or_equal_to => 0 }
+
+  API_KEY = "AIzaSyAqerTH3Ee8TcKFLn695LAu8HQm9SBFrn0"
+
+  def get_attr(attr)
+    BookDecorator.get_book_attr(isbn, attr)
+  end
+
+  def api_book
+    @api_book ||= BookDecorator.get_google_book(isbn)
+  end
+
+  def validate_isbn
+    if api_book.nil?
+       errors.add(:isbn, 'does not exist')
+       return false
+    else
+      return true
+    end
+  end
 end
 

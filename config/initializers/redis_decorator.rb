@@ -1,47 +1,38 @@
-module RedisDecorator
+module ApplicationDecorator
+  class BookDecorator
+    API_KEY = "AIzaSyAqerTH3Ee8TcKFLn695LAu8HQm9SBFrn0"
+    CACHE_EXPIRE = 1.months
 
-  API_KEY = "AIzaSyAqerTH3Ee8TcKFLn695LAu8HQm9SBFrn0"
-  uri = URI.parse(ENV["REDISTOGO_URL"] || "redis://localhost:6379/")
-  REDIS = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
-
-  def get_attr(attr)
-    if REDIS.get("#{isbn}_#{attr}").nil?
-      google_attribute = google_data(attr)
-      add_to_redis(google_attribute, attr)
-      return google_attribute
-    else
-      REDIS.get("#{isbn}_#{attr}")
+    def self.get_book_attr(isbn, attr)
+      add_object_redis(isbn, @book) if get_redis(isbn, attr).nil?
+      get_redis(isbn, attr)
     end
-  end
 
-  def google_data(attr)
-    return google_book.title if attr == "title"
-    return google_book.authors if attr == "author"
-    return google_book.image_link if attr == "image"
-    nil
-  end
-
-  def check_isbn
-    GoogleBooks.search("isbn:#{isbn}", :api_key => API_KEY).first != nil
-  end
-
-  def validate_isbn
-    if check_isbn != true
-       errors.add(:isbn, 'does not exist')
-       return false
-    else
-      return true
+    def self.get_google_book(isbn)
+      if !REDIS.get(isbn)
+        @book ||= GoogleBooks.search("isbn:#{isbn}", :api_key => API_KEY).first
+        add_object_to_redis(isbn, @book)
+      end
+      get_book_json(isbn)
     end
-  end
 
-  private
+    private
 
-  def add_to_redis(title, attribute)
-    REDIS.set("#{isbn}_#{attribute}", title)
-    REDIS.expire("#{isbn}_#{attribute}", 2_500_000)
-  end
+      def self.get_book_json(isbn)
+        if REDIS.get(isbn)
+          JSON.parse REDIS.get(isbn)
+        end
+      end
 
-  def google_book
-    @google_book ||= GoogleBooks.search("isbn:#{isbn}", :api_key => API_KEY).first
+      def self.get_redis(key, attr)
+        (JSON.parse REDIS.get(key))[attr]
+      end
+
+      def self.add_object_to_redis(key, value)
+        if !value.nil?
+          REDIS.set(key, value.to_json)
+          REDIS.expire(key, CACHE_EXPIRE)
+        end
+      end
   end
 end

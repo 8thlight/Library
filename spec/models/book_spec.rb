@@ -4,7 +4,7 @@ def new_book(isbn, quantity)
   Book.new(isbn: isbn, quantity: quantity)
 end
 
-describe Book do
+describe Book, :slow_tests => true do
 
   context "validations" do
     it "should reject duplicate ISBNs" do
@@ -47,13 +47,6 @@ describe Book do
         book = new_book(isbn, 1)
         book.get_attr("title").should == title
       end
-
-      context "#google_data" do
-        it "returns the google attribute" do
-          book = new_book(isbn,1)
-          book.google_data("title").should == title
-        end
-      end
     end
 
     {
@@ -62,14 +55,7 @@ describe Book do
     }.each do |isbn, author|
       it "should retrieve the author #{author} with the isbn #{isbn}" do
         book = new_book(isbn, 1)
-        book.get_attr("author").should == author
-      end
-
-      context "#google_data" do
-        it "returns the google attribute" do
-          book = new_book(isbn,1)
-          book.google_data("author").should == author
-        end
+        book.get_attr("authors").should == author
       end
     end
   end
