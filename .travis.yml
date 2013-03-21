@@ -7,7 +7,7 @@ env:
 
 script:
   - RAILS_ENV=test bundle exec rake --trace db:migrate spec
-  - RAILS_ENV=test bundle exec rspec db:migrate spec --tag slow_tests
+  - RAILS_ENV=test bundle exec rspec spec --tag slow_tests
 services:
   - redis-server
 
