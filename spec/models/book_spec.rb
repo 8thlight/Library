@@ -55,7 +55,7 @@ describe Book, :slow_tests => true do
     }.each do |isbn, author|
       it "should retrieve the author #{author} with the isbn #{isbn}" do
         book = new_book(isbn, 1)
-        book.get_attr("authors").should == author
+        book.get_attr("author").should == author
       end
     end
   end

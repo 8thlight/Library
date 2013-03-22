@@ -4,7 +4,7 @@ class Book < ActiveRecord::Base
   has_many :waitinglist
   has_many :users, :through => :checkouts
   has_many :users, :through => :waitinglist
-  after_initialize :api_book
+  #after_initialize :api_book
 
   attr_accessible :isbn, :quantity, :quantity_left
 
@@ -28,7 +28,7 @@ class Book < ActiveRecord::Base
   end
 
   def validate_isbn
-    if api_book.nil?
+    if api_book.empty?
        errors.add(:isbn, 'does not exist')
        return false
     else

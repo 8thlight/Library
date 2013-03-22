@@ -4,35 +4,26 @@ module ApplicationDecorator
     CACHE_EXPIRE = 1.months
 
     def self.get_book_attr(isbn, attr)
-      add_object_redis(isbn, @book) if get_redis(isbn, attr).nil?
-      get_redis(isbn, attr)
+      add_book_to_redis(isbn) if REDIS.hlen("isbn_#{isbn}").zero?
+      REDIS.hget("isbn_#{isbn}", attr)
     end
 
     def self.get_google_book(isbn)
-      if !REDIS.get(isbn)
-        @book ||= GoogleBooks.search("isbn:#{isbn}", :api_key => API_KEY).first
-        add_object_to_redis(isbn, @book)
-      end
-      get_book_json(isbn)
+      add_book_to_redis(isbn) if REDIS.hlen("isbn_#{isbn}").zero?
+      REDIS.hgetall("isbn_#{isbn}")
+    end
+
+    def self.book(isbn)
+      @book ||= GoogleBooks.search("isbn:#{isbn}", :api_key => API_KEY).first
     end
 
     private
 
-      def self.get_book_json(isbn)
-        if REDIS.get(isbn)
-          JSON.parse REDIS.get(isbn)
-        end
+    def self.add_book_to_redis(key)
+      if !book.nil?
+        REDIS.hmset("isbn_#{key}", "title", book.title, "author", book.authors, "image", book.image_link)
+        REDIS.expire(key,  CACHE_EXPIRE)
       end
-
-      def self.get_redis(key, attr)
-        (JSON.parse REDIS.get(key))[attr]
-      end
-
-      def self.add_object_to_redis(key, value)
-        if !value.nil?
-          REDIS.set(key, value.to_json)
-          REDIS.expire(key, CACHE_EXPIRE)
-        end
-      end
+    end
   end
 end
