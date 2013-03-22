@@ -46,9 +46,6 @@ gem 'net-ping'
 gem 'redis'
 gem 'draper', '~> 1.0'
 
-gem 'faker'
-gem 'factory_girl'
-gem 'threach'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
