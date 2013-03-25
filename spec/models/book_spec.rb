@@ -4,7 +4,7 @@ def new_book(isbn, quantity)
   Book.new(isbn: isbn, quantity: quantity)
 end
 
-describe Book, :slow_tests => false do
+describe Book, :network_dependent => true do
 
   context "validations" do
     it "should reject duplicate ISBNs" do
