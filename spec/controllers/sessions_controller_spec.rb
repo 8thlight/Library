@@ -3,6 +3,7 @@ require 'spec_helper'
 describe SessionsController do
   describe "POST create" do
     it "should redirect to home page" do
+      response.code.should eq("200")
     end
   end
 

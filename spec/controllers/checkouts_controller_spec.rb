@@ -77,6 +77,22 @@ describe CheckoutsController, :slow_tests => true do
       create "check out"
     end
 
+    context "when the if there is a wait list and user cannot check out" do
+      it "sets a flash[:notice] when there is a wait list" do
+        subject.stub(:check_waitlist).and_return(false)
+        create "check out"
+        flash[:notice].should eq("There are people waiting on the waitinglist.")
+      end
+    end
+
+    context "when there are too many checkouts" do
+      it "sets a flash[:notice] for too many checkouts" do
+        subject.stub(:too_many_checkouts?).and_return(true)
+        create "check out"
+        flash[:notice].should eq("too many checkouts")
+      end
+    end
+
     context "when the checkout is saved successfully" do
       it "sets a flash[:notice] checkout" do
         create "check out"
