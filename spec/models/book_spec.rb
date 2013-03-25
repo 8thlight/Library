@@ -36,6 +36,11 @@ describe Book, :slow_tests => false do
       new_book("9780321287654", 1)
       subject.should have(1).error_on(:isbn)
     end
+
+    it "should add an error when the api book is empty" do
+      subject.stub_chain(:api_book, :empty?).and_return(true)
+      subject.validate_isbn.should be_false
+    end
   end
 
   describe "Google Book API" do
