@@ -9,7 +9,8 @@ class ApplicationController < ActionController::Base
   end
 
   def book_not_checked_out?(book)
-    Checkout.where(user_id: current_user.id, book_id: book.id).empty?
+    Checkout.where(user_id: current_user.id, book_id: book.id).empty? ||
+      book.quantity_left == 0
   end
 
   def current_user
@@ -21,7 +22,8 @@ class ApplicationController < ActionController::Base
   end
 
   def not_on_waiting_list?(book)
-    Waitinglist.where(user_id: current_user.id, book_id: book.id).empty?
+    Waitinglist.where(user_id: current_user.id, book_id: book.id).empty? ||
+      Checkout.where(user_id: current_user.id, book_id: book.id).empty?
   end
 
   def user_signed_in?
