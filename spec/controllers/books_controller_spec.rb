@@ -24,20 +24,20 @@ describe BooksController do
   end
 
   describe "PUT 'update'" do
-#    book = Book.create(isbn: "9781934356371", quantity: 2, quantity_left: 2)
-#
-#    it "find book by isbn" do
-#      Book.should_receive(:find_by_isbn)
-#      put 'update', {:isbn => "9781934356371"}
-#    end
-#
-#    it "updates attribute of the book" do
-#      book = mock_model(Book)
-#      Book.stub(:find_by_isbn).with("9781934356371").and_return(book)
-#      book.stub(:update_attributes).and_return(true)
-#      put 'update', {:isbn => "9781934356371"}
-#      response.should redirect_to :action => "show"
-#    end
+    before(:each) do
+      @book = Book.new(isbn: "9781934356371", quantity: 1, quantity_left: 1)
+      Book.stub(:find_by_isbn).with("9781934356371").and_return(@book)
+    end
+
+    it "updates attribute of the book" do
+      @book.should_receive(:update_attributes).and_return(true)
+      put 'update', {:isbn => "9781934356371", :book => {:quantity => 2}}
+    end
+
+    it "should redirect to show page" do
+      response.code.should eq("200")
+      put 'update', {:isbn => "9781934356371", :book => {:quantity => 2}}
+    end
   end
 
   describe "GET mybooks" do
