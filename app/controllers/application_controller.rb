@@ -2,15 +2,19 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   helper_method :current_user, :user_signed_in?, :correct_user?,
-                :book_not_checked_out?, :not_on_waiting_list?, :too_many_checkouts?
+                :book_not_checked_out?, :not_on_waiting_list?, :too_many_checkouts?,
+                :user_checked_out_book?
 
   def too_many_checkouts?(num, user_id)
     Checkout.where(user_id: user_id).count >= num
   end
 
   def book_not_checked_out?(book)
-    Checkout.where(user_id: current_user.id, book_id: book.id).empty? ||
-      book.quantity_left == 0
+    !user_checked_out_book?(book) && book.quantity_left != 0
+  end
+
+  def user_checked_out_book?(book)
+    !Checkout.where(user_id: current_user.id, book_id: book.id).empty?
   end
 
   def current_user
@@ -22,8 +26,8 @@ class ApplicationController < ActionController::Base
   end
 
   def not_on_waiting_list?(book)
-    Waitinglist.where(user_id: current_user.id, book_id: book.id).empty? ||
-      Checkout.where(user_id: current_user.id, book_id: book.id).empty?
+    Waitinglist.where(user_id: current_user.id, book_id: book.id).empty? &&
+      !user_checked_out_book?(book)
   end
 
   def user_signed_in?

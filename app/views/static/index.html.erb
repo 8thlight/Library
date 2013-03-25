@@ -33,7 +33,7 @@
           <%= link_to "Check out", check_out_path(book.isbn) %>
         <% end %>
 
-        <% if !book_not_checked_out?(book) %>
+        <% if user_checked_out_book?(book) %>
           <%= link_to "return", return_book_path(book.isbn) %></td>
         <% end %>
       </tr>

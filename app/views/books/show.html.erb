@@ -27,4 +27,9 @@
   <% if not_on_waiting_list?(@book) %>
     <%= link_to "add myself to the waiting list", wait_list_path(@book.isbn) %>
   <% end %>
+
+  <% if user_checked_out_book?(book) %>
+    <%= link_to "return", return_book_path(book.isbn) %></td>
+  <% end %>
+
 <% end %>
