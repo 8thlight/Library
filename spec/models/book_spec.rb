@@ -4,11 +4,18 @@ def new_book(isbn, quantity)
   Book.new(isbn: isbn, quantity: quantity)
 end
 
-describe Book, :network_dependent => true do
+describe Book do
+  it { should have_many(:checkouts) }
+  it { should have_many(:waitinglist) }
+  it { should have_many(:users).through(:waitinglist) }
+  it { should validate_uniqueness_of(:isbn) }
+  it { should validate_presence_of(:quantity) }
+  it { should validate_numericality_of(:quantity) }
+  it { should ensure_length_of(:isbn) }
 
   context "validations" do
     it "should reject duplicate ISBNs" do
-      Book.create!(isbn: "9781937557027",quantity: 1)
+      described_class.create!(isbn: "9781937557027",quantity: 1)
       book_with_same_isbn = new_book("9781937557027", 31)
       book_with_same_isbn.should_not be_valid
     end
@@ -43,7 +50,7 @@ describe Book, :network_dependent => true do
     end
   end
 
-  describe "Google Book API" do
+  describe "Google Book API", :network_dependent => true do
     {
       "9781934356548" => "Agile Web Development With Rails",
       "9781937557027" => "Mobile first"

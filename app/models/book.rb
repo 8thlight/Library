@@ -1,10 +1,9 @@
 class Book < ActiveRecord::Base
   include ApplicationDecorator
-  has_many :check_outs
+  has_many :checkouts
   has_many :waitinglist
   has_many :users, :through => :checkouts
   has_many :users, :through => :waitinglist
-  #after_initialize :api_book
 
   attr_accessible :isbn, :quantity, :quantity_left
 
