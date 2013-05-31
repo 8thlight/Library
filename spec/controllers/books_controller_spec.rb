@@ -4,13 +4,16 @@ describe BooksController do
 
   describe "#book_preview" do
     it "retrieves book from book/new" do
-      Book.should_receive(:new)
+      book = mock_model(Book, :title => "foo")
+      Book.should_receive(:new).and_return(book)
       get 'preview'
+      book.title.should == "foo"
     end
   end
 
   describe "GET 'new'" do
     it "returns http success" do
+      Book.should_receive(:new)
       get 'new'
       response.should be_success
     end
@@ -18,8 +21,11 @@ describe BooksController do
 
   describe "GET 'edit'" do
     it "should return book" do
-      Book.should_receive(:find_by_isbn).with("9781934356371")
+      book = mock_model(Book, :isbn => "9781934356371", :quantity_left => 1)
+      Book.should_receive(:find_by_isbn).with("9781934356371").and_return(book)
       get 'edit', {:isbn => "9781934356371"}
+      book.isbn.should == "9781934356371"
+      book.quantity_left.should == 1
     end
   end
 
@@ -32,6 +38,7 @@ describe BooksController do
     it "updates attribute of the book" do
       @book.should_receive(:update_attributes).and_return(true)
       put 'update', {:isbn => "9781934356371", :book => {:quantity => 2}}
+      @book.quantity_left.should == 2
     end
 
     it "should redirect to show page" do

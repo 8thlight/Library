@@ -1,12 +1,5 @@
 require 'spec_helper'
 
-def hundred_users_checkout
-  #User.create(email: "tak.yuki@gmail.com", name: "Taka")
-  #Checkout.create(user_id: 1, book_id: 1, check_out_date: Time.now)
-  #threads = Array.new(5) {Thread.new  {post :create, {:isbn => "9781934356371"}}}
-  #threads.each(&:join)
-end
-
 describe CheckoutsController, :network_dependent => true do
   let (:check_out) {mock_model(Checkout).as_null_object}
   let (:book) {mock_model(Book).as_null_object}

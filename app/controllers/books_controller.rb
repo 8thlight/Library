@@ -2,9 +2,11 @@ class BooksController < ApplicationController
   def new
     @book = Book.new
   end
+
   def preview
     @book = Book.new(params[:book])
   end
+
   def create
     @book = Book.new(params[:book])
     @book.quantity_left = @book.quantity
