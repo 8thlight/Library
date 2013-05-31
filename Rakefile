@@ -1,7 +1,19 @@
 #!/usr/bin/env rake
-# Add your own tasks in files placed in lib/tasks ending in .rake,
-# for example lib/tasks/capistrano.rake, and they will automatically be available to Rake.
-
+require 'rspec/core/rake_task'
+require 'cucumber/rake/task'
 require File.expand_path('../config/application', __FILE__)
+
+RSpec::Core::RakeTask.new(:tests) do |t|
+  t.rspec_opts = "--tag network_dependent"
+end
+
+RSpec::Core::RakeTask.new(:tests) do |t|
+end
+
+Cucumber::Rake::Task.new(:tests) do |t|
+end
+
+task :default => :tests
+
 
 Library::Application.load_tasks

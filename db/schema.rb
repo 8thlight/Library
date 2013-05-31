@@ -23,14 +23,6 @@ ActiveRecord::Schema.define(:version => 20130305170116) do
     t.integer  "quantity_left"
   end
 
-  create_table "books_users", :id => false, :force => true do |t|
-    t.integer "book_id"
-    t.integer "user_id"
-  end
-
-  add_index "books_users", ["book_id", "user_id"], :name => "index_books_users_on_book_id_and_user_id"
-  add_index "books_users", ["user_id", "book_id"], :name => "index_books_users_on_user_id_and_book_id"
-
   create_table "checkouts", :force => true do |t|
     t.integer  "book_id"
     t.integer  "user_id"
