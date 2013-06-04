@@ -50,7 +50,7 @@ describe Book do
     end
   end
 
-  describe "Google Book API", :network_dependent => true do
+  describe "Google Book API" do
     {
       "9781934356548" => "Agile Web Development With Rails",
       "9781937557027" => "Mobile first"

@@ -4,13 +4,11 @@ require 'cucumber/rake/task'
 require File.expand_path('../config/application', __FILE__)
 
 RSpec::Core::RakeTask.new(:tests) do |t|
-  t.rspec_opts = "--tag network_dependent"
-end
-
-RSpec::Core::RakeTask.new(:tests) do |t|
+  t.rspec_opts = "--format documentation"
 end
 
 Cucumber::Rake::Task.new(:tests) do |t|
+  t.cucumber_opts = "features --format pretty"
 end
 
 task :default => :tests

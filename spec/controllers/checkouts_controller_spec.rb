@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe CheckoutsController, :network_dependent => true do
+describe CheckoutsController do
   let (:check_out) {mock_model(Checkout).as_null_object}
   let (:book) {mock_model(Book).as_null_object}
   let (:user) {mock_model(User).as_null_object}
