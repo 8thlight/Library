@@ -37,6 +37,6 @@ class BooksController < ApplicationController
     @book = Book.find_by_isbn(params[:isbn])
     @book.quantity_left += ((params[:book][:quantity].to_i) - @book.quantity)
     @book.update_attributes(params[:book])
-      redirect_to :action => "show"
+    redirect_to :action => "show"
   end
 end

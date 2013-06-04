@@ -5,8 +5,8 @@ gem 'rails', '3.2.11'
 group :test, :development do
   gem 'sqlite3'
   gem "rspec-rails"
-  gem "webrat"
   gem "simplecov"
+  gem 'webrat'
   gem "simplecov-rcov"
   gem 'pry'
   gem 'cucumber-rails', :require => false
@@ -35,7 +35,5 @@ gem 'ruby-openid-apps-discovery'
 gem 'awesome_print'
 gem 'googlebooks'
 gem 'jquery-rails'
-
 gem 'redis'
-gem 'draper', '~> 1.0'
 
