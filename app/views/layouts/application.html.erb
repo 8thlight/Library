@@ -17,6 +17,11 @@
           <li><%= link_to "View Your Books", mybooks_path %></li>
           <li>Signed in as <%= current_user.email %>. </li>
           <li><%= link_to "Not you? Sign out", signout_path, :method => :delete %></li>
+          <%= form_tag('/search', method: 'post') do %>
+            <%= label_tag(:search_book, 'search: ') %>
+            <%= text_field_tag(:search_book) %>
+            <%= submit_tag('search') %>
+          <% end %>
         <% else %>
         <li><%= link_to "sign in with Google", signin_path %></li>
         <li><%= link_to "sign in with your 8th Light account", signin_openid_path %></li>

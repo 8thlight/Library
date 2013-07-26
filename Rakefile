@@ -4,11 +4,11 @@ require 'cucumber/rake/task'
 require File.expand_path('../config/application', __FILE__)
 
 RSpec::Core::RakeTask.new(:tests) do |t|
-  t.rspec_opts = "--format documentation"
+  t.rspec_opts = ""
 end
 
 Cucumber::Rake::Task.new(:tests) do |t|
-  t.cucumber_opts = "features --format pretty"
+  t.cucumber_opts = ""
 end
 
 task :default => :tests

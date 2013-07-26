@@ -37,5 +37,6 @@ Library::Application.routes.draw do
   get 'book/:isbn/waiting_list' => 'waitinglists#create', as: 'wait_list'
   post '/waitinglist' => 'waitinglists#create'
 
+  post '/search' => 'books#search'
 end
 

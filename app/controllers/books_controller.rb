@@ -39,4 +39,9 @@ class BooksController < ApplicationController
     @book.update_attributes(params[:book])
     redirect_to :action => "show"
   end
+
+  def search
+    query = {:isbn  =>  params[:search_book]}
+    @results = Book.where(query)
+  end
 end
